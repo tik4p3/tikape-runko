@@ -1,0 +1,28 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+Tässä:valittuannos muodostuu .java puolella kun valitaan tietty annos.Tästä "hashmap" tms muu, josta päästään käsiksi
+valittuun annokseen ja sen raaka-ainetietoihin. lisäksi käyttöön tuleel lista raaka-aineista, "aineet"
+
+<head>
+  <title th:text="${valittuannos.nimi}"> Annoksen nimi</title>
+</head>
+    <body>
+    <h1 th:text="${valittuannos.nimi}">Annoksen nimi</h1> 
+        
+        <h3>Raaka-aineet lisäämisjärjestyksessä</h3> 
+        
+        <ol type="1">
+            <li th:each="Raakaaine : ${aineet}">
+                <span th:text="${Raakaaine.nimi}">Raaka-aine</span> 
+                <span th:text="${Raakaaine.ohje}">Raaka-aine ohje</span>
+            </li>
+        </ol>
+        <br/>
+        <ul>
+            <li>
+                <a href="keittokirja/">Siirry keittokirjan pääsivulle!</a>
+            </li>
+        </ul>
+    </body>        
+
+</html>
