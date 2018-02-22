@@ -1,0 +1,58 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    Droppi valikko: Lista jo olemassa olevista raaka-aineista = raakaaineet
+    Kun raaka-aine valitaan, se lisääntyy listaan: valitutaineet (tähän button: lisää?)
+    (järjestysnumero lukee annoksen tiedoissa (lisäämisjärjestys))
+    Teksti: [Määrä]
+    Tekstikenttä: lukumaara
+    Teksti: [Lisäohje raaka-aineille]
+    Tekstikenttä: lisaohje
+    Button: lisaa valLista: valitut raaka-aineetittu raaka-aine (päivittää sivun ja lisää raaka-aineet ehdotetutAineet-listaan)
+    Lista: valitut raaka-aineet
+    Teksti: [Anna annokselle nimi]
+    Tekstikenttä: annoksenNimi
+    Button: uusiAnnos 
+   
+    <head>
+        <title>Annoksen koostaminen </title>
+    </head>
+    <body>
+        <h1> Raaka-aineiden valitseminen</h1>
+        <p> Valitse seuraavasta valikosta lisäämisjärjestyksessä lisättävät aineet annokseen</p>
+        <form method="POST" action="">
+            Raaka-aine:<br/>
+            <ul>
+                <li th:each="aine : ${raakaaineet}">            
+                <select name="raakaaine">
+                    <option name="${aine.nimi}">Raaka-aine</option>                    
+                </select>
+                </li>
+            </ul>
+            <br/>
+                Määrä:<br/>
+                <input type="text" name="lukumaara"/><br/>
+            <br/>
+                Lisäohje raaka-aineelle:<br/>
+                <input type="text" name="lisaohje"/>
+                <input type="submit" value="Lis&auml&auml valittu raaka-aine"/> 
+                            
+            <ol>
+                <li th:each="aine : ${ehdotetutAineet}">
+                    <span th:text="${aine.nimi}">Raaka-aineet</span>
+                </li>
+            </ol>
+            <br/> Jos olet tyytyväinen raaka-aineisiin, anna annokselle nimi ja lisää se Keittokirjaan
+            <br/>
+                Annoksen nimi:<br/>
+                <input type="text" name="nimi"/><br/>
+            <br/>
+            <input type="submit" value="Lisää annos Keittokirjaan"/><br/>
+        <br/>
+        <ul>
+            <li>
+                <a href="keittokirja/">Siirry keittokirjan pääsivulle!</a>
+            </li>
+        </ul>
+        </form>
+    </body>  
+</html>
