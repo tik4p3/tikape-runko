@@ -4,13 +4,13 @@ package com.mycompany.tikaperyhmatyo2_internetsovellus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Ohje {
+public class Annos {
     
     private String nimi;
     private List<Raakaaineohje> aineet;
  
 
-    public Ohje(String nimi) {
+    public Annos(String nimi) {
         this.nimi = nimi;
         this.aineet = new ArrayList<>();
     }
