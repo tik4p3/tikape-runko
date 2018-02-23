@@ -18,7 +18,7 @@ public class Main {
         
         
         // Tämä ryhmitelty sivujen mukaan - etusivu ja neljä tai viisi muuta sivua
-        // Jokaisella sivulla Sparkin get ja post -metodit, vaikka en olisi postille käyttöä keksinyt
+        // Jokaisella sivulla Sparkin get ja post -metodit, vaikka en olisi niille käyttöä keksinyt
         
         
         
@@ -146,12 +146,33 @@ public class Main {
         
         // Lisää aineita ja tarkastele aineita “/lisaa-aineita”
         // 
-         Spark.get("/lisaa-aineita", (req, res) -> {
+        Spark.get("/lisaa-aineita", (req, res) -> {
+             
+            // haetaan tietokannasta olemassaolevat raaka-aineet, ja lisätään ne listaan    *
+            
+            
+            List<Raakaaine> raakaaineet = new ArrayList(); 
+             
+             
+            
+           
+           // Lähetetään ne Thymeleafin avulla HTML-juttuihin  
+             
            HashMap<String, Object> map = new HashMap();
+           map.put("raakaaineet", raakaaineet);
            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
         });
 
-        Spark.post("*", (req, res) -> {
+        Spark.post("/lisaa-aineita", (req, res) -> {
+            
+            // Haetaan Thymeleafista 
+            String lisattava = req.queryParams("raakaaine");
+            
+            // Lisätään tuo tietokantaan (tekemättä siitä oliota Javaan)        *
+            
+            
+            // päivitetään sivu
+            res.redirect("/lisaa-aineita");
             
         return "";
         });
@@ -164,6 +185,7 @@ public class Main {
 
         Spark.post("*", (req, res) -> {
             
+          
         return "";
         });
     }
