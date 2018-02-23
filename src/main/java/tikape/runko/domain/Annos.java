@@ -1,5 +1,5 @@
 
-package com.mycompany.tikaperyhmatyo2_internetsovellus;
+package tikape.runko.domain;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import java.util.List;
 public class Annos {
     
     private String nimi;
-    private List<RaakaaineAnnos> aineet;
+    private List<Raakaaine> aineet;
  
 
     public Annos(String nimi) {
@@ -16,15 +16,19 @@ public class Annos {
     }
 
 
-    public void setAine(RaakaaineAnnos raakaaineannos) {
-        this.aineet.add(raakaaineannos);
+    public void setNimi(){
+        this.nimi = nimi;
+    }
+    
+    public void setAine(Raakaaine raakaaine) {
+        this.aineet.add(raakaaine);
     }
 
     public String getNimi() {
         return nimi;
     }
 
-    public List<RaakaaineAnnos> getAineet() {
+    public List<Raakaaineohje> getAineet() {
         return aineet;
     }
 }

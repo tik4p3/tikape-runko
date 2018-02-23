@@ -1,4 +1,4 @@
-package com.mycompany.tikaperyhmatyo2_internetsovellus;
+package tikape.runko.domain;
 
 import java.sql.*;
 
