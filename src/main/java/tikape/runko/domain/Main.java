@@ -30,7 +30,7 @@ public class Main {
         //Etusivu
         Spark.get("/keittokirja", (req, res) -> {
             
-            //Integer userId = Integer.parseInt(req.params(":id"));
+           
             // tietokanta, jossa on varsinaiset annos
             // osoite pitää vielä lisätä
             
@@ -67,7 +67,7 @@ public class Main {
         });
         
         Spark.post("/keittokirja/:id", (req, res) -> {
-                req.queryParams("");
+                req.queryParams(""); //?
             
         return "";
 
@@ -75,6 +75,16 @@ public class Main {
         //Lista annoksista “/annoslistaus/1” (jokaisen annoksen nimessä linkki)
         //tekemättä
          Spark.get("/annoslistaus/:id", (req, res) -> {
+             
+           Integer AnnosId = Integer.parseInt(req.params(":id"));
+             
+           //Haetaan annoksen jokaisen raaka-aineen nimi ja raaka-aineen ohje ("aineet"-nimi listalle)      *
+           
+            List <String> Raakaaineet = new ArrayList();
+             
+            // Raakaaineen nimen perusteella haetaan ohje
+             
+             
            HashMap<String, Object> map = new HashMap();
            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
         });
@@ -110,11 +120,11 @@ public class Main {
             
             // Lista jo laitetuista raaka-aineista                                      *
             // raakaaineohje-tietokannasta pitää etsiä tämän annoksen raaka-aineet      *
-            List<RaakaaineAnnos> joLaitetut = new ArrayList();
+            List<RaakaaineAnnos> ehdotetutAineet = new ArrayList();
             
             
             map.put("raakaaineet", raakaaineet);
-            map.put("laitetut", joLaitetut);
+            map.put("laitetut", ehdotetutAineet);
             
            
            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
