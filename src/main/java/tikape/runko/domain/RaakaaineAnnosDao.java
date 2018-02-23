@@ -12,20 +12,20 @@ import java.util.List;
  *
  * @author Joona Niemelä
  */
-public class RaakaaineDao implements Dao <Raakaaine, Integer> {
+public class RaakaaineAnnosDao implements Dao <RaakaaineAnnos, Integer> {
 
     @Override
-    public Raakaaine findOne(Integer key) throws SQLException {
+    public RaakaaineAnnos findOne(Integer key) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Raakaaine> findAll() throws SQLException {
+    public List<RaakaaineAnnos> findAll() throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Raakaaine saveOrUpdate(Raakaaine object) throws SQLException {
+    public RaakaaineAnnos saveOrUpdate(RaakaaineAnnos object) throws SQLException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

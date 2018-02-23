@@ -21,19 +21,24 @@ public class Main {
         // Jokaisella sivulla Sparkin get ja post -metodit, vaikka en olisi niille käyttöä keksinyt
         
         
+                // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
+        if (System.getenv("PORT") != null) {
+            Spark.port(Integer.valueOf(System.getenv("PORT")));
+        }
+        
         
         //Etusivu
         Spark.get("/keittokirja", (req, res) -> {
             
             
-            // tietokanta, jossa on varsinaiset ohjeet
+            // tietokanta, jossa on varsinaiset annos
             // osoite pitää vielä lisätä
             
             Database databaseOhjeet = new Database("ei vielä ole");
             
-            // tietokannasta hakea ohjeiden nimet
+            // tietokannasta hakea annos nimet
             
-            List<String> ohjeet = new ArrayList<>();
+            List<String> annokset = new ArrayList<>();
 
             // avaa yhteys tietokantaan
             // tietokannalle pitää vielä lisätä osoite                     *
@@ -48,13 +53,13 @@ public class Main {
             // käsittele kyselyn tulokset
             while (tulos.next()) {
                 String nimi = tulos.getString("nimi");
-                ohjeet.add(nimi);
+                annokset.add(nimi);
             }
             
             
            HashMap<String, Object> map = new HashMap();
            
-           map.put("ohjeet", ohjeet);
+           map.put("annos", annokset);
            
            conn.close();
            
@@ -104,7 +109,7 @@ public class Main {
             
             // Lista jo laitetuista raaka-aineista                                      *
             // raakaaineohje-tietokannasta pitää etsiä tämän annoksen raaka-aineet      *
-            List<Raakaaineohje> joLaitetut = new ArrayList();
+            List<RaakaaineAnnos> joLaitetut = new ArrayList();
             
             
             map.put("raakaaineet", raakaaineet);
@@ -127,8 +132,8 @@ public class Main {
             Raakaaine raakaaine2 = tarvittavametodi(raakaaine);
             
             // Javaan uusi raaka-aineohje, joka myöhemmin lisätään tietokantaan
-            Raakaaineohje raakaaineohje = new Raakaaineohje(raakaaine2, maara, lisaohje);
-            List<Raakaaineohje> raakaaineohjeet = new ArrayList();
+            RaakaaineAnnos raakaaineohje = new RaakaaineAnnos(raakaaine2, maara, lisaohje);
+            List<RaakaaineAnnos> raakaaineohjeet = new ArrayList();
             raakaaineohjeet.add(raakaaineohje);
             
             // Järjestyksen laskeminen ja laittaminen?

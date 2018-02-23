@@ -1,10 +1,11 @@
-
 package com.mycompany.tikaperyhmatyo2_internetsovellus;
 
 import java.sql.*;
 import java.util.*;
 
 public interface Dao<T, K> {
+    
+    //avaimena indeksi
     T findOne(K key) throws SQLException;
     List<T> findAll() throws SQLException;
     T saveOrUpdate(T object) throws SQLException;

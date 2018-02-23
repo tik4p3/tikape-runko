@@ -1,14 +1,30 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.mycompany.tikaperyhmatyo2_internetsovellus;
 
-/**
- *
- * @author Joona Niemelä
- */
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ohje {
     
+    private String nimi;
+    private List<RaakaaineAnnos> aineet;
+ 
+
+    public Ohje(String nimi) {
+        this.nimi = nimi;
+        this.aineet = new ArrayList<>();
+    }
+
+
+    public void setAine(RaakaaineAnnos raakaaineohje) {
+        this.aineet.add(raakaaineohje);
+    }
+
+    public String getNimi() {
+        return nimi;
+    }
+
+    public List<RaakaaineAnnos> getAineet() {
+        return aineet;
+    }
 }
