@@ -28,9 +28,9 @@ public class Main {
         
         
         //Etusivu
-        Spark.get("/keittokirja/:id", (req, res) -> {
+        Spark.get("/keittokirja", (req, res) -> {
             
-            
+            //Integer userId = Integer.parseInt(req.params(":id"));
             // tietokanta, jossa on varsinaiset annos
             // osoite pitää vielä lisätä
             
@@ -46,7 +46,7 @@ public class Main {
                     = databaseOhjeet.getConnection();
             // tee kysely
             PreparedStatement stmt
-                    = conn.prepareStatement("SELECT nimi FROM Ohjeet");
+                    = conn.prepareStatement("SELECT nimi FROM Annokset");
             
             ResultSet tulos = stmt.executeQuery();
 
@@ -65,11 +65,16 @@ public class Main {
            
            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "keittokirja"));
         });
+        
+        Spark.post("/keittokirja/:id", (req, res) -> {
+                req.queryParams("");
+            
+        return "";
 
         
         //Lista annoksista “/annoslistaus/1” (jokaisen annoksen nimessä linkki)
         //tekemättä
-         Spark.get("/annoslistaus", (req, res) -> {
+         Spark.get("/annoslistaus/:id", (req, res) -> {
            HashMap<String, Object> map = new HashMap();
            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
         });
