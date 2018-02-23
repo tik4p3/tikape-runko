@@ -9,12 +9,6 @@ package com.mycompany.tikaperyhmatyo2_internetsovellus;
  *
  * @author Joona Niemelä
  */
-public class Raakaaine {
-    
-    private String nimi;
-
-    public Raakaaine(String nimi) {
-        this.nimi = nimi;
-    }
+public class RaakaaineOhjeDao {
     
 }
