@@ -1,0 +1,170 @@
+
+package com.mycompany.tikaperyhmatyo2_internetsovellus;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import spark.ModelAndView;
+import spark.Spark;
+import spark.template.thymeleaf.ThymeleafTemplateEngine;
+
+
+public class Main {
+    
+    public static void main(String[] args) throws Exception {
+        
+        
+        // Tämä ryhmitelty sivujen mukaan - etusivu ja neljä tai viisi muuta sivua
+        // Jokaisella sivulla Sparkin get ja post -metodit, vaikka en olisi postille käyttöä keksinyt
+        
+        
+        
+        //Etusivu
+        Spark.get("/keittokirja", (req, res) -> {
+            
+            
+            // tietokanta, jossa on varsinaiset ohjeet
+            // osoite pitää vielä lisätä
+            
+            Database databaseOhjeet = new Database("ei vielä ole");
+            
+            // tietokannasta hakea ohjeiden nimet
+            
+            List<String> ohjeet = new ArrayList<>();
+
+            // avaa yhteys tietokantaan
+            // tietokannalle pitää vielä lisätä osoite                     *
+            Connection conn
+                    = databaseOhjeet.getConnection();
+            // tee kysely
+            PreparedStatement stmt
+                    = conn.prepareStatement("SELECT nimi FROM Ohjeet");
+            
+            ResultSet tulos = stmt.executeQuery();
+
+            // käsittele kyselyn tulokset
+            while (tulos.next()) {
+                String nimi = tulos.getString("nimi");
+                ohjeet.add(nimi);
+            }
+            
+            
+           HashMap<String, Object> map = new HashMap();
+           
+           map.put("ohjeet", ohjeet);
+           
+           conn.close();
+           
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+        });
+
+        Spark.post("*", (req, res) -> {
+            
+        return "";
+        });
+        
+        //Lista annoksista “/annoslistaus/1” (jokaisen annoksen nimessä linkki)
+        //tekemättä
+         Spark.get("/annoslistaus", (req, res) -> {
+           HashMap<String, Object> map = new HashMap();
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+        });
+
+        Spark.post("*", (req, res) -> {
+            
+        return "";
+        });
+        
+        
+        // Lisää annos “/lisaa-annos”
+         Spark.get("/lisaa-annos", (req, res) -> {
+             
+            HashMap<String, Object> map = new HashMap();
+            List<String> raakaaineet = new ArrayList();
+            
+            // yhteys raaka-ainetietokantaan, osoite puuttuu
+            Database databaseRaakaaine = new Database("osoite");
+            Connection con = databaseRaakaaine.getConnection();
+            
+            
+            // Etsitään raaka-aineiden nimet
+            PreparedStatement stmt
+                    = con.prepareStatement("SELECT nimi FROM Raaka-aineet");
+            
+            ResultSet tulos = stmt.executeQuery();
+
+            // käsittele kyselyn tulokset
+            while (tulos.next()) {
+                String nimi = tulos.getString("nimi");
+                raakaaineet.add(nimi);
+            }
+            
+            // Lista jo laitetuista raaka-aineista                                      *
+            // raakaaineohje-tietokannasta pitää etsiä tämän annoksen raaka-aineet      *
+            List<Raakaaineohje> joLaitetut = new ArrayList();
+            
+            
+            map.put("raakaaineet", raakaaineet);
+            map.put("laitetut", joLaitetut);
+            
+           
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+        });
+         
+         
+        Spark.post("/lisaa-annos", (req, res) -> {
+            
+            
+            // Haetaan Thymeleafilta tiedot Thymeleafin nimeämisten mukaan
+            String raakaaine = req.queryParams("raakaaine");
+            String maara = req.queryParams("maara");
+            String lisaohje = req.queryParamOrDefault("lisaohje", "");
+            
+            // haetaan nimen perusteella raaka-aine, jos tarvetta?                      *
+            Raakaaine raakaaine2 = tarvittavametodi(raakaaine);
+            
+            // Javaan uusi raaka-aineohje, joka myöhemmin lisätään tietokantaan
+            Raakaaineohje raakaaineohje = new Raakaaineohje(raakaaine2, maara, lisaohje);
+            List<Raakaaineohje> raakaaineohjeet = new ArrayList();
+            raakaaineohjeet.add(raakaaineohje);
+            
+            // Järjestyksen laskeminen ja laittaminen?
+            raakaaineohje.setJarjestys(raakaaineohjeet.size());
+            
+            // Tietokantaan laittaminen                                                 *
+            
+            // Sivun päivittäminen
+            
+            res.redirect("/lisaa-annos");
+            
+        return "";
+        });
+        
+        
+        // Lisää aineita ja tarkastele aineita “/lisaa-aineita”
+        // 
+         Spark.get("/lisaa-aineita", (req, res) -> {
+           HashMap<String, Object> map = new HashMap();
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+        });
+
+        Spark.post("*", (req, res) -> {
+            
+        return "";
+        });
+        
+        //Tilastotietoa annoksista “/tilastoja”
+         Spark.get("/tilastoja", (req, res) -> {
+           HashMap<String, Object> map = new HashMap();
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+        });
+
+        Spark.post("*", (req, res) -> {
+            
+        return "";
+        });
+    }
+}
