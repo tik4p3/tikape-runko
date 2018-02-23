@@ -28,7 +28,7 @@ public class Main {
         
         
         //Etusivu
-        Spark.get("/keittokirja", (req, res) -> {
+        Spark.get("/keittokirja/:id", (req, res) -> {
             
             
             // tietokanta, jossa on varsinaiset annos
@@ -66,10 +66,6 @@ public class Main {
            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "keittokirja"));
         });
 
-        Spark.post("*", (req, res) -> {
-            
-        return "";
-        });
         
         //Lista annoksista “/annoslistaus/1” (jokaisen annoksen nimessä linkki)
         //tekemättä
