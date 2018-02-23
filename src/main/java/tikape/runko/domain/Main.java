@@ -86,7 +86,7 @@ public class Main {
              
              
            HashMap<String, Object> map = new HashMap();
-           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "annos"));
         });
 
         Spark.post("*", (req, res) -> {
@@ -127,7 +127,7 @@ public class Main {
             map.put("laitetut", ehdotetutAineet);
             
            
-           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "lisaaannos"));
         });
          
          
@@ -176,7 +176,7 @@ public class Main {
              
            HashMap<String, Object> map = new HashMap();
            map.put("raakaaineet", raakaaineet);
-           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "lisaaaine"));
         });
 
         Spark.post("/lisaa-aineita", (req, res) -> {
@@ -196,7 +196,7 @@ public class Main {
         //Tilastotietoa annoksista “/tilastoja”
          Spark.get("/tilastoja", (req, res) -> {
            HashMap<String, Object> map = new HashMap();
-           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "tilastotieto"));
         });
 
         Spark.post("*", (req, res) -> {
