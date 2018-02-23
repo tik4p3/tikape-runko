@@ -1,0 +1,31 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    
+<head>
+  <title>Tietoa keittokirjasta</title>
+</head>
+<body>
+    <h2>Keittokirjan tietojen haku</h2> 
+    
+    <p> Kuinka monnessa annoksessa seuraava raaka-aine esiintyy</p>
+    <p> Valitse tarkasteltava raaka-aine valikosta</p>
+        <form method="POST" action="">
+            Raaka-aine:<br/>
+            <ul>
+                <li th:each="aine : ${raakaaineet}">            
+                <select name="raakaaine">
+                    <option name="${aine.nimi}">Raaka-aine</option>                    
+                </select>
+                </li> 
+            </ul>
+            <br/>
+            <input type="submit" value="Valitse raaka-aine"/><br/>
+            <ul>
+                <li>
+                    <a href="keittokirja/">Siirry keittokirjan pääsivulle!</a>
+                </li>
+            </ul>
+  
+        </form>      
+    </body>
+</html>
