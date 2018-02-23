@@ -7,7 +7,7 @@ import java.util.List;
 public class Annos {
     
     private String nimi;
-    private List<Raakaaineohje> aineet;
+    private List<RaakaaineAnnos> aineet;
  
 
     public Annos(String nimi) {
@@ -16,15 +16,15 @@ public class Annos {
     }
 
 
-    public void setAine(Raakaaineohje raakaaineohje) {
-        this.aineet.add(raakaaineohje);
+    public void setAine(RaakaaineAnnos raakaaineannos) {
+        this.aineet.add(raakaaineannos);
     }
 
     public String getNimi() {
         return nimi;
     }
 
-    public List<Raakaaineohje> getAineet() {
+    public List<RaakaaineAnnos> getAineet() {
         return aineet;
     }
 }
