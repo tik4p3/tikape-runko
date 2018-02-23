@@ -63,7 +63,7 @@ public class Main {
            
            conn.close();
            
-           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
+           return new ThymeleafTemplateEngine().render(new ModelAndView(map, "keittokirja"));
         });
 
         Spark.post("*", (req, res) -> {
