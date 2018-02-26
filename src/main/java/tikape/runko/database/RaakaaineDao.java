@@ -1,4 +1,4 @@
-package tikape.runko.domain;
+package tikape.runko.database;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,12 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import tikape.runko.domain.Database;
+import tikape.runko.domain.Raakaaine;
 
 public class RaakaaineDao implements Dao<Raakaaine, Integer> {
 
     private Database database;
 
-    public RaakaaineDao(Database database) {
+    public RaakaaineDao(Database database)  {
         this.database = database;
     }
 

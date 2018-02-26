@@ -30,7 +30,7 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
             return null;
         }
 
-        RaakaaineAnnos raakaaine = new RaakaaineAnnos(rs.getInt("id"), rs.getString("nimi"));
+        RaakaaineAnnos raakaaine = new RaakaaineAnnos(rs.getInt("id"), rs.getInt("id"));
 
         stmt.close();
         rs.close();
@@ -53,9 +53,9 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
 
             while (rs.next()) {
 
-                RaakaaineAnnos raakaaine = new RaakaaineAnnos(rs.getInt("raakaaine_id"), rs.getInt("annos_id"), rs.getString("maara"), rs.getInt("jarjestys"), rs.getString("lisaohje"));
+                RaakaaineAnnos raakaaine = new RaakaaineAnnos(rs.getInt("raakaaine_id"), rs.getInt("annos_id"));
 
-                raakaaineet.add(raakaaine);
+                //raakaaineet.add(raakaaine); rs.getString("maara"), rs. rs.getString("nimi");
 
             }
             stmt.close();
@@ -96,9 +96,6 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
         conn.close();
     }
 
-    @Override
-    public RaakaaineAnnos findOne(Integer key) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+   
 
 }

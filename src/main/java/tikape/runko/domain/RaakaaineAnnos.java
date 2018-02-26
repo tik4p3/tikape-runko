@@ -11,7 +11,7 @@ public class RaakaaineAnnos {
     private int raakaaine_id;
     private int annos_id;
 
-    public RaakaaineAnnos(Integer raakaaine_id, Integer annos_id, String maara, Integer jarjestys, String lisaohje) {
+    public RaakaaineAnnos(Integer raakaaine_id, Integer annos_id) {
         this.raakaaine_id = raakaaine_id;
         this.annos_id = annos_id;
         this.jarjestys = jarjestys;

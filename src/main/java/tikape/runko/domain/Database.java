@@ -8,8 +8,8 @@ public class Database {
 
     
     // pitää laittaa Herokun tietokantajutut vielä              *
-    public Database() throws ClassNotFoundException {
-        this.databaseAddress = "jotain";
+    public Database(String databaseAddress) {
+        this.databaseAddress = databaseAddress;
     }
 
     public Connection getConnection() throws SQLException {

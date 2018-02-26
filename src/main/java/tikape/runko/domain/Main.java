@@ -3,7 +3,6 @@ package tikape.runko.domain;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,9 +15,9 @@ import tikape.runko.database.RaakaaineDao;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
-
-        Database database = new Database(); // Muutetaan tietokannan nimi oikeaksi
+    public static void main(String[] args) throws Exception {
+        
+        Database database = new Database("jdbc:sqlite:kirja.db"); // Muutetaan tietokannan nimi oikeaksi
 
         RaakaaineDao raakaaineetDao = new RaakaaineDao(database);
         RaakaaineAnnosDao raakaaineannoksetDao = new RaakaaineAnnosDao(database);
