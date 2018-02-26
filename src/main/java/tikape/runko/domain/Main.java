@@ -35,18 +35,18 @@ public class Main {
         // Tämä ryhmitelty sivujen mukaan - etusivu ja neljä tai viisi muuta sivua
         // Jokaisella sivulla Sparkin get ja post -metodit, vaikka en olisi niille käyttöä keksinyt
         // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
-//        if (System.getenv("PORT") != null) {
-//            Spark.port(Integer.valueOf(System.getenv("PORT")));
-//        }
-//
-//        //Etusivu
-//        Spark.get("/keittokirja", (req, res) -> {
-//            HashMap map = new HashMap<>();
-//            map.put("annos",annoksetDao.findAll());
-//
-//            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "keittokirja"));
-//        });
-//    
+        if (System.getenv("PORT") != null) {
+            Spark.port(Integer.valueOf(System.getenv("PORT")));
+        }
+
+        //Etusivu
+        Spark.get("/keittokirja", (req, res) -> {
+            HashMap map = new HashMap<>();
+            // map.put("annos",annoksetDao.findAll());
+
+            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "keittokirja"));
+        });
+    
 //        Spark.get("/annoslistaus/:id", (req, res) -> {
 //            HashMap map = new HashMap<>();
 //
