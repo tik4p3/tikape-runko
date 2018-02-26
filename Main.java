@@ -28,7 +28,7 @@ public class Main {
         }
 
         //Etusivu
-        Spark.get("/", (req, res) -> {
+        Spark.get("/keittokirja", (req, res) -> {
 
             // tietokanta, jossa on varsinaiset annos
             // osoite pitää vielä lisätä
