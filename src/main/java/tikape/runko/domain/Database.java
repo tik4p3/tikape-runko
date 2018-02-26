@@ -6,8 +6,10 @@ public class Database {
 
     private String databaseAddress;
 
-    public Database(String databaseAddress) throws ClassNotFoundException {
-        this.databaseAddress = databaseAddress;
+    
+    // pitää laittaa Herokun tietokantajutut vielä              *
+    public Database() throws ClassNotFoundException {
+        this.databaseAddress = "jotain";
     }
 
     public Connection getConnection() throws SQLException {

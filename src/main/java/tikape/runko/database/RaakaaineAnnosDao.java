@@ -17,27 +17,27 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
         this.database = database;
     }
 
-//    @Override
-//    public RaakaaineAnnos findOne(Integer key) throws SQLException {
-//        Connection conn = database.getConnection();
-//
-//        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM RaakaaineAnnos WHERE raakaaine_id = ?, ");
-//        stmt.setInt(1, key);
-//        ResultSet rs = stmt.executeQuery();
-//
-//        boolean hasOne = rs.next();
-//        if (!hasOne) {
-//            return null;
-//        }
-//
-//        RaakaaineAnnos raakaaine = new Raakaaine(rs.getInt("id"), rs.getString("nimi"));
-//
-//        stmt.close();
-//        rs.close();
-//        conn.close();
-//
-//        return raakaaine;
-//    }
+    @Override
+    public RaakaaineAnnos findOne(Integer key) throws SQLException {
+        Connection conn = database.getConnection();
+
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM RaakaaineAnnos WHERE raakaaine_id = ?, ");
+        stmt.setInt(1, key);
+        ResultSet rs = stmt.executeQuery();
+
+        boolean hasOne = rs.next();
+        if (!hasOne) {
+            return null;
+        }
+
+        RaakaaineAnnos raakaaine = new RaakaaineAnnos(rs.getInt("id"), rs.getString("nimi"));
+
+        stmt.close();
+        rs.close();
+        conn.close();
+
+        return raakaaine;
+    }
 
     @Override
     public List<RaakaaineAnnos> findAll() throws SQLException {
