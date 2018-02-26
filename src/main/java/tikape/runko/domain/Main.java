@@ -20,7 +20,6 @@ public class Main {
         RaakaaineAnnosDao raakaaineannokset = new RaakaaineAnnosDao(database);
         AnnosDao annokset = new AnnosDao(database);
 
-
         // Tämä ryhmitelty sivujen mukaan - etusivu ja neljä tai viisi muuta sivua
         // Jokaisella sivulla Sparkin get ja post -metodit, vaikka en olisi niille käyttöä keksinyt
         // asetetaan portti jos heroku antaa PORT-ympäristömuuttujan
@@ -28,7 +27,6 @@ public class Main {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
 
-  
         //Etusivu
         Spark.get("/keittokirja", (req, res) -> {
 
@@ -37,20 +35,20 @@ public class Main {
             Database databaseOhjeet = new Database("ei vielä ole");
 
             // tietokannasta hakea annos nimet
-            List<String> annokset = new ArrayList<>();
+            List<String> annostenNimet = new ArrayList<>();
 
             // avaa yhteys tietokantaan
             // tietokannalle pitää vielä lisätä osoite                     *
             Connection conn = databaseOhjeet.getConnection();
             // tee kysely
-            PreparedStatement stmt = conn.prepareStatement("SELECT nimi FROM Ohjeet");
 
+            PreparedStatement stmt = conn.prepareStatement("SELECT nimi FROM Ohjeet");
             ResultSet tulos = stmt.executeQuery();
 
             // käsittele kyselyn tulokset
             while (tulos.next()) {
                 String nimi = tulos.getString("nimi");
-                annokset.add(nimi);
+                annostenNimet.add(nimi);
             }
 
             HashMap<String, Object> map = new HashMap();
@@ -66,44 +64,114 @@ public class Main {
 
             return "";
         });
+    
+        Spark.get("/annoslistaus/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
 
+            map.put("annos", annosDao.findOne(Integer.parseInt(req.params("id"))));
+
+            return new ModelAndView(map, "annos");
+        }, new ThymeleafTemplateEngine());
         
         // RAAKA-AINEET
-        Spark.get("/lisaaaine", (req, res) -> {
+        // Haetaan kaikki raaka-aineet
+        Spark.get("/haeaineet", (req, res) -> {
 
-            // haetaan tietokannasta olemassaolevat raaka-aineet, ja lisätään ne listaan      
-            List<Raakaaine> raakaaineet = new ArrayList();
-
-            // Lähetetään ne Thymeleafin avulla HTML-juttuihin            
             HashMap<String, Object> map = new HashMap();
-            map.put("raakaaineet", raakaaineet);
-            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "lisaaaine"));
-        });
+            map.put("raakaaineet", raakaaineet.findAll());
 
+            return new ModelAndView(map, "lisaaaine");
+        }, new ThymeleafTemplateEngine());
+
+        // Lisätään raaka-aine
         Spark.post("/lisaaaine", (req, res) -> {
 
-            Raakaaine raakaaine = new Raakaaine(req.queryParams("nimi"));
+            Raakaaine raakaaine = new Raakaaine(-1, req.queryParams("nimi"));
             raakaaineet.saveOrUpdate(raakaaine);
-            
-            res.redirect("/annos");
+
+            res.redirect("/lisaaaine");
             return "";
         });
 
-        
+        // Poistetaan yksittäinen raaka-aine
+        Spark.post("/poistaraakaaine", (req, res) -> {
+
+            Raakaaine raakaaine = new Raakaaine(-1, req.queryParams("nimi"));
+            raakaaineet.saveOrUpdate(raakaaine);
+
+            raakaaineet.delete(raakaaine.getId());
+
+            res.redirect("/poistaraakaaine");
+            return "";
+        });
+
         
         // ANNOKSET
-        //Lista annoksista “/annoslistaus/1” (jokaisen annoksen nimessä linkki)
-        //tekemättä
+        // Haetaan kaikki annokset
         Spark.get("/annoslistaus", (req, res) -> {
+
             HashMap<String, Object> map = new HashMap();
-            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
-        });
+            map.put("annokset", annokset.findAll());
 
-        Spark.post("*", (req, res) -> {
+            return new ModelAndView(map, "annokset");
+        }, new ThymeleafTemplateEngine());
 
+        // Lisätään annos
+        Spark.post("/annoslistaus", (req, res) -> {
+
+            Annos annos = new Annos(-1, req.queryParams("nimi"));
+            annokset.saveOrUpdate(annos);
+
+            res.redirect("/annoslistaus");
             return "";
         });
 
+        // Poistetaan annos
+        Spark.post("/poistaannos", (req, res) -> {
+
+            Annos annos = new Annos(-1, req.queryParams("nimi"));
+            annokset.saveOrUpdate(annos);
+
+            annokset.delete(annos.getId());
+
+            res.redirect("/poistaannos");
+            return "";
+        });
+
+        
+        // RAAKAAINEANNOKSET
+        // Haetaan kaikki annokset
+        Spark.get("/annoslistaus", (req, res) -> {
+
+            HashMap<String, Object> map = new HashMap();
+            map.put("annokset", annokset.findAll());
+
+            return new ModelAndView(map, "annokset");
+        }, new ThymeleafTemplateEngine());
+
+        // Lisätään annos
+        Spark.post("/annoslistaus", (req, res) -> {
+
+            Annos annos = new Annos(-1, req.queryParams("nimi"));
+            annokset.saveOrUpdate(annos);
+
+            res.redirect("/annoslistaus");
+            return "";
+        });
+
+        // Poistetaan annos
+        Spark.post("/poistaannos", (req, res) -> {
+
+            Annos annos = new Annos(-1, req.queryParams("nimi"));
+            annokset.saveOrUpdate(annos);
+
+            annokset.delete(annos.getId());
+
+            res.redirect("/poistaannos");
+            return "";
+        });
+
+       
         
         // Lisää annos “/lisaa-annos”
         Spark.get("/lisaa-annos", (req, res) -> {
@@ -161,7 +229,6 @@ public class Main {
             return "";
         });
 
-        
         //TILASTOT
         //Tilastotietoa annoksista “/tilastoja”
         Spark.get("/tilastoja", (req, res) -> {

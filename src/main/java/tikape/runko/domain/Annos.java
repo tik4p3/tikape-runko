@@ -6,15 +6,20 @@ import java.util.List;
 
 public class Annos {
     
+    private Integer id;
     private String nimi;
     private List<Raakaaine> aineet;
  
 
-    public Annos(String nimi) {
+    public Annos(Integer id, String nimi) {
+        this.id = id;
         this.nimi = nimi;
         this.aineet = new ArrayList<>();
     }
 
+    public int getId(){
+        return id;
+    }
 
     public void setNimi(){
         this.nimi = nimi;
@@ -28,7 +33,7 @@ public class Annos {
         return nimi;
     }
 
-    public List<Raakaaineohje> getAineet() {
+    public List<Raakaaine> getAineet() {
         return aineet;
     }
 }
