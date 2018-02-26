@@ -18,7 +18,7 @@ public class Main {
 
     public static void main(String[] args) throws SQLException {
 
-        Database database = new Database("jdbc:sqlite:database.db"); // Muutetaan tietokannan nimi oikeaksi
+        Database database = new Database(); // Muutetaan tietokannan nimi oikeaksi
 
         RaakaaineDao raakaaineetDao = new RaakaaineDao(database);
         RaakaaineAnnosDao raakaaineannoksetDao = new RaakaaineAnnosDao(database);
@@ -204,32 +204,32 @@ public class Main {
         });
 
         Spark.post("/lisaa-annos", (req, res) -> {
-
-            // Haetaan Thymeleafilta tiedot Thymeleafin nimeämisten mukaan
-            String raakaaine = req.queryParams("raakaaine");
-            String maara = req.queryParams("maara");
-            String lisaohje = req.queryParams("lisaohje");
-
-            // haetaan nimen perusteella raaka-aine, jos tarvetta?                      *
-            // Raakaaine raakaaine2 = tarvittavametodi(raakaaine);
-            
-            Raakaaine raakaaine2 = 
-
-            // Javaan uusi raaka-aineohje, joka myöhemmin lisätään tietokantaan
-            RaakaaineAnnos raakaaineohje = new RaakaaineAnnos(raakaaine2, maara, lisaohje);
-            List<RaakaaineAnnos> raakaaineohjeet = new ArrayList();
-            raakaaineohjeet.add(raakaaineohje);
-
-            // Järjestyksen laskeminen ja laittaminen?
-            raakaaineohje.setJarjestys(raakaaineohjeet.size());
-
-            // Tietokantaan laittaminen
-            
-            
-            
-            
-            // Sivun päivittäminen
-            res.redirect("/lisaa-annos");
+//
+//            // Haetaan Thymeleafilta tiedot Thymeleafin nimeämisten mukaan
+//            String raakaaine = req.queryParams("raakaaine");
+//            String maara = req.queryParams("maara");
+//            String lisaohje = req.queryParams("lisaohje");
+//
+//            // haetaan nimen perusteella raaka-aine, jos tarvetta?                      *
+//            // Raakaaine raakaaine2 = tarvittavametodi(raakaaine);
+//            
+//            Raakaaine raakaaine2 = 
+//
+//            // Javaan uusi raaka-aineohje, joka myöhemmin lisätään tietokantaan
+//            RaakaaineAnnos raakaaineohje = new RaakaaineAnnos(raakaaine2, maara, lisaohje);
+//            List<RaakaaineAnnos> raakaaineohjeet = new ArrayList();
+//            raakaaineohjeet.add(raakaaineohje);
+//
+//            // Järjestyksen laskeminen ja laittaminen?
+//            raakaaineohje.setJarjestys(raakaaineohjeet.size());
+//
+//            // Tietokantaan laittaminen
+//            
+//            
+//            
+//            
+//            // Sivun päivittäminen
+//            res.redirect("/lisaa-annos");
 
             return "";
         });
