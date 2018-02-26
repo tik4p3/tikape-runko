@@ -14,11 +14,18 @@ Raaka-aineita haetaan raaka-aineet listasta
             </li>
         </ul>
         <p>Lisää raaka-aineita Keittokirjaan</p>
-            <form method="POST" action="????">
+            <form method="POST" action="/lisaaaine">
                 Raaka-aine:<br/>
                 <input type="text" name="raakaaine"/>   
                 <br/>
                 <input type="submit" value="Lisää raaka-aine Keittokirjaan"/><br/>
+            </form>
+            <p>Poista raaka-aineita Keittokirjasta</p>
+            <form method="POST" action="/poistaraakaaaine">
+                Raaka-aine:<br/>
+                <input type="text" name="raakaaine"/>   
+                <br/>
+                <input type="submit" value=">Poista raaka-aine Keittokirjasta"/><br/>
             </form>
     
    </body>
