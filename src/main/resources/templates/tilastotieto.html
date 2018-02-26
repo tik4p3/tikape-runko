@@ -19,10 +19,11 @@
                 </li> 
             </ul>
             <br/>
-            <form method="POST" action="/????">
+            <form method="POST" action="/tilastot">
                 <input type="submit" value="Valitse raaka-aine"/><br/>
             </form>
             <ul>
+                <h3> <span th:text="${album.title}"> esiintyy kaikissa keittokirjan annoksissa yhteensä </h3>
                 <li>
                    <a th:href="@{~/keittokirja}">Siirry keittokirjan pääsivulle!</a>
                 </li>
