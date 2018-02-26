@@ -64,11 +64,11 @@ public class Main {
 
             return "";
         });
-    //kesken, daojen haut?
+    
         Spark.get("/annoslistaus/:id", (req, res) -> {
             HashMap map = new HashMap<>();
 
-            map.put("annos", annosDao.findOneByAnnosId(Integer.parseInt(req.params("id"))));
+            map.put("annos", annosDao.findOne(Integer.parseInt(req.params("id"))));
 
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
