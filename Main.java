@@ -28,7 +28,7 @@ public class Main {
         }
 
         //Etusivu
-        Spark.get("/keittokirja", (req, res) -> {
+        Spark.get("/", (req, res) -> {
 
             // tietokanta, jossa on varsinaiset annos
             // osoite pitää vielä lisätä
@@ -64,7 +64,14 @@ public class Main {
 
             return "";
         });
+    //kesken, daojen haut?
+        Spark.get("/annoslistaus/:id", (req, res) -> {
+            HashMap map = new HashMap<>();
 
+            map.put("annos", annosDao.findOneByAnnosId(Integer.parseInt(req.params("id"))));
+
+            return new ModelAndView(map, "annos");
+        }, new ThymeleafTemplateEngine());
         
         // RAAKA-AINEET
         // Haetaan kaikki raaka-aineet
