@@ -24,10 +24,14 @@
             
             
             <div>
+                
                 <select>
                     <option th:each="aine : ${raakaaineet}"
                             th:value="raakaaine"
-                            th:text="${aine.nimi}"/>
+                            th:text="${aine.nimi}"
+                            label = "label"
+                            name = "raakaaine"/>
+                    
                 </select>
             </div>
             
