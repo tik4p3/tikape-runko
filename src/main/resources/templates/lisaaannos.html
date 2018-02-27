@@ -22,21 +22,16 @@
         <form method="POST" action="">
             Raaka-aine:<br/>
             
-            <select>
-                <option value="volvo">Volvo</option>
-                <option value="saab">Saab</option>
-                <option value="opel">Opel</option>
-                <option value="audi">Audi</option>
-            </select>
             
-            
-            <ul>
-                <li th:each="aine : ${raakaaineet}">            
-                <select name="raakaaine">
-                    <option name="${aine.nimi}">Raaka-aine</option>                    
+            <div>
+                <select>
+                    <option th:each="aine : ${raakaaineet}"
+                            th:value="${aine.nimi}"
+                            th:text="${aine.nimi}"/>
                 </select>
-                </li>
-            </ul>
+            </div>
+            
+
             <br/>
                 Maara:<br/>
                 <input type="text" name="lukumaara"/><br/>
