@@ -1,24 +1,24 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-    Droppi valikko: Lista jo olemassa olevista raaka-aineista = raakaaineet
-    Kun raaka-aine valitaan, se lisääntyy listaan: valitutaineet (tähän button: lisää?)
-    (järjestysnumero lukee annoksen tiedoissa (lisäämisjärjestys))
-    Teksti: [Määrä]
-    Tekstikenttä: lukumaara
-    Teksti: [Lisäohje raaka-aineille]
-    Tekstikenttä: lisaohje
-    Button: lisaa valLista: valitut raaka-aineetittu raaka-aine (päivittää sivun ja lisää raaka-aineet ehdotetutAineet-listaan)
+   <!-- Droppi valikko: Lista jo olemassa olevista raaka-aineista = raakaaineet
+    Kun raaka-aine valitaan, se lisaantyy listaan: valitutaineet (tahan button: lisaa?)
+    (jarjestysnumero lukee annoksen tiedoissa (lisaamisjarjestys))
+    Teksti: [Maara]
+    Tekstikentta: lukumaara
+    Teksti: [Lisaohje raaka-aineille]
+    Tekstikentta: lisaohje
+    Button: lisaa valLista: valitut raaka-aineetittu raaka-aine (paivittaa sivun ja lisaa raaka-aineet ehdotetutAineet-listaan)
     Lista: valitut raaka-aineet
     Teksti: [Anna annokselle nimi]
-    Tekstikenttä: annoksenNimi
-    Button: uusiAnnos 
+    Tekstikentta: annoksenNimi
+    Button: uusiAnnos -->
    
     <head>
         <title>Annoksen koostaminen </title>
     </head>
     <body>
         <h1> Raaka-aineiden valitseminen</h1>
-        <p> Valitse seuraavasta valikosta lisäämisjärjestyksessä lisättävät aineet annokseen</p>
+        <p> Valitse seuraavasta valikosta lisaamisjarjestyksessa lisattavat aineet annokseen</p>
         <form method="POST" action="">
             Raaka-aine:<br/>
             <ul>
@@ -29,10 +29,10 @@
                 </li>
             </ul>
             <br/>
-                Määrä:<br/>
+                Maara:<br/>
                 <input type="text" name="lukumaara"/><br/>
             <br/>
-                Lisäohje raaka-aineelle:<br/>
+                Lisaohje raaka-aineelle:<br/>
                 <input type="text" name="lisaohje"/>
                 <input type="submit" value="Lisaa valittu raaka-aine"/> 
                             
@@ -41,20 +41,22 @@
                     <span th:text="${aine.nimi}">Raaka-aineet</span>
                 </li>
             </ol>
-            <br/> Jos olet tyytyväinen raaka-aineisiin, anna annokselle nimi ja lisää se Keittokirjaan
+            <br/> Jos olet tyytyvainen raaka-aineisiin, anna annokselle nimi ja lisaa se Keittokirjaan
             <br/>
                 Annoksen nimi:<br/>
                 <input type="text" name="nimi"/><br/>
             <br/>
             <form method="POST" action="/????">
-                <input type="submit" value="Lisää annos Keittokirjaan"/><br/>
+                <input type="submit" value="Lisaa annos Keittokirjaan"/><br/>
             </form>
             <br/>
         <ul>
             <li>
-                <a th:href="@{~/keittokirja}">Siirry keittokirjan pääsivulle!</a>
+                <a th:href="@{~/keittokirja}">Siirry keittokirjan paasivulle!</a>
             </li>
         </ul>
         </form>
     </body>  
 </html>
+
+

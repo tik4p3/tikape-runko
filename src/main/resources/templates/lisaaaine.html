@@ -5,7 +5,7 @@ Raaka-aineita haetaan raaka-aineet listasta
         <title>Lisaa ja tarkastele </title>
     </head>
     <body>
-        <h1> Käytössä olevat raaka-aineet</h1>    
+        <h1> Kaytössa olevat raaka-aineet</h1>    
         <ul>
             <li th:each="aine : ${raakaaineet}">
                 <span th:text="${aine.nimi}">Raaka-aineet</span><br/>
@@ -13,12 +13,12 @@ Raaka-aineita haetaan raaka-aineet listasta
                 <span th:text="${aine.lisaohje}">lisaohje</span><br/>    
             </li>
         </ul>
-        <p>Lisää raaka-aineita Keittokirjaan</p>
+        <p>Lisaa raaka-aineita Keittokirjaan</p>
             <form method="POST" action="/lisaaaine">
                 Raaka-aine:<br/>
                 <input type="text" name="raakaaine"/>   
                 <br/>
-                <input type="submit" value="Lisää raaka-aine Keittokirjaan"/><br/>
+                <input type="submit" value="Lisaa raaka-aine Keittokirjaan"/><br/>
             </form>
             <p>Poista raaka-aineita Keittokirjasta</p>
             <form method="POST" action="/poistaraakaaaine">
@@ -29,7 +29,7 @@ Raaka-aineita haetaan raaka-aineet listasta
             </form>
             <ul>
             <li>
-                <a th:href="@{~/keittokirja}">Siirry keittokirjan pääsivulle!</a>
+                <a th:href="@{~/keittokirja}">Siirry keittokirjan paasivulle!</a>
             </li>
         </ul>
     

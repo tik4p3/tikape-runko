@@ -73,25 +73,25 @@ public class Main {
         }, new ThymeleafTemplateEngine());
            
 
-        // RAAKA-AINEET
-        // Haetaan kaikki raaka-aineet
-        Spark.get("/haeaineet", (req, res) -> {
-
-            HashMap<String, Object> map = new HashMap();
-            map.put("raakaaineet", raakaaineetDao.findAll());
-
-            return new ModelAndView(map, "lisaaaine");
-        }, new ThymeleafTemplateEngine());
-
-        // Lisätään raaka-aine
-        Spark.post("/lisaaaine", (req, res) -> {
-
-            Raakaaine raakaaine = new Raakaaine(-1, req.queryParams("nimi"));
-            raakaaineetDao.saveOrUpdate(raakaaine);
-
-            res.redirect("/lisaaaine");
-            return "";
-        });
+//        // RAAKA-AINEET
+//        // Haetaan kaikki raaka-aineet
+//        Spark.get("/haeaineet", (req, res) -> {
+//
+//            HashMap<String, Object> map = new HashMap();
+//            map.put("raakaaineet", raakaaineetDao.findAll());
+//
+//            return new ModelAndView(map, "lisaaaine");
+//        }, new ThymeleafTemplateEngine());
+//
+//        // Lisätään raaka-aine
+//        Spark.post("/lisaaaine", (req, res) -> {
+//
+//            Raakaaine raakaaine = new Raakaaine(-1, req.queryParams("nimi"));
+//            raakaaineetDao.saveOrUpdate(raakaaine);
+//
+//            res.redirect("/lisaaaine");
+//            return "";
+//        });
 //
 //        // Poistetaan yksittäinen raaka-aine
 //        Spark.post("/poistaraakaaine", (req, res) -> {
@@ -215,17 +215,25 @@ public class Main {
 //
 //            return "";
 //        });
-//
-//        //TILASTOT
-//        //Tilastotietoa annoksista “/tilastoja”
-//        Spark.get("/tilastoja", (req, res) -> {
-//            HashMap<String, Object> map = new HashMap();
-//            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "Path to template"));
-//        });
-//
-//        Spark.post("*", (req, res) -> {
-//
-//            return "";
-//        });
+        Spark.get("/lisaa-aineita", (req, res) -> {
+
+            HashMap<String, Object> map = new HashMap();
+
+
+            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "lisaaannos"));
+        });
+          
+
+        //TILASTOT
+        //Tilastotietoa annoksista “/tilastotieto”
+        Spark.get("/tilastotieto", (req, res) -> {
+            HashMap<String, Object> map = new HashMap();
+            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "tilastotieto"));
+        });
+
+        Spark.post("*", (req, res) -> {
+
+            return "";
+        });
     }
 }
