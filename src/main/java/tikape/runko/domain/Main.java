@@ -24,8 +24,18 @@ public class Main {
         try {
             database = new Database();
         } catch (Exception e) {
-            System.out.println("Virhe tietokantaan yhdistettäessä");
+            System.out.println("Virhe tietokantaan yhdistettäessä: " + e);
         }
+        
+        
+        Connection conn = database.getConnection();
+        ResultSet resultset = conn.prepareStatement("SELECT * FROM Annos").executeQuery();
+        System.out.println("(Main) onko resultsetissä 'next()': " + resultset.next());
+        System.out.println("(Main) Löydettyjen annosten nimet: ");
+        while (resultset.next())   {
+            System.out.println("(Main) " + resultset.getString("nimi"));
+        }
+        
 
 
         RaakaaineDao raakaaineetDao = new RaakaaineDao(database);
@@ -44,10 +54,12 @@ public class Main {
             HashMap map = new HashMap<>();
             
             
-            List annokset = annoksetDao.findAll();
+            List<Annos> annokset = annoksetDao.findAll();
             
             map.put("annos", annokset);
-            System.out.println("Löydetyt annokset: " + annoksetDao.findAll().toString());
+               for (Annos annos : annokset)   {
+                System.out.println(" (Main) " + annos.getId() + "|" + annos.getNimi());
+            }
 
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "keittokirja"));
         });

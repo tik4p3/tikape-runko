@@ -4,13 +4,13 @@ import java.sql.*;
 
 public class Database {
 
-//    private String databaseAddress;
-//
-//    
-//    // pitää laittaa Herokun tietokantajutut vielä              *
-//    public Database(String databaseAddress) {
-//        this.databaseAddress = databaseAddress;
-//    }
+    private String databaseAddress = "jdbc:sqlite:kirja.db";
+
+    
+    // pitää laittaa Herokun tietokantajutut vielä              *
+    public Database(String databaseAddress) {
+        this.databaseAddress = databaseAddress;
+    }
     
     public Database ()  {
         
@@ -32,7 +32,9 @@ public class Database {
         
         Connection connection = DriverManager.getConnection("jdbc:sqlite:kirja.db");
         
-        System.out.println("otettiin yhteys SQLite-tietokantaan");
+        System.out.println("otettiin yhteys SQLite-tietokantaan (kirja.db)");
+        
+       
 
         return connection;
     }
