@@ -45,9 +45,13 @@ public class AnnosDao implements Dao<Annos, Integer> {
         List<Annos> annokset = null;
 
         try (Connection connection = database.getConnection()) {
+            
 
             PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos");
             ResultSet rs = stmt.executeQuery();
+            
+            System.out.println("AnnosDao findAll suoritti kyselyn " + rs.toString());
+            System.out.println("resultsetin koko: " + rs.getFetchSize());
             
             annokset = new ArrayList<>();
             
@@ -58,9 +62,9 @@ public class AnnosDao implements Dao<Annos, Integer> {
 
             }
             
-            System.out.println("AnnosDao findAll suoritti kyselyn " + rs.toString());
+            
             System.out.println("Luotiin lista, jonka viimeisen olion indeksi on: " + annokset.lastIndexOf(rs));
-            System.out.println("resultsetin koko: " + rs.getFetchSize());
+            
             
             stmt.close();
             rs.close();
