@@ -183,6 +183,10 @@ public class Main {
             String raakaaine = req.queryParams("raakaaine");
             String lukumaara = req.queryParams("lukumaara");
             String lisaohje = req.queryParams("lisaohje");
+            
+            System.out.println("(Main, lisaa-annos) Saatiin seuraavat: " + 
+                    raakaaine + " (raaka-aine), " + lukumaara + 
+                    " (määrä), ja " + lisaohje + " (lisäohje)");
 
             // haetaan nimen perusteella raaka-aine, jos tarvetta?                      *
             // Raakaaine raakaaine2 = tarvittavametodi(raakaaine);
