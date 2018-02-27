@@ -76,6 +76,17 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
 
         return null;
     }
+    
+        public Raakaaine saveOrUpdate(String nimi) throws SQLException {
+
+        try (Connection conn = database.getConnection()) {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raakaaine (nimi) VALUES (?)");
+            stmt.setString(1, nimi);
+            stmt.executeUpdate();
+        }
+
+        return null;
+    }
 
     @Override
     public void delete(Integer key) throws SQLException {

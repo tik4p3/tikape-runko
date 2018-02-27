@@ -21,6 +21,15 @@
         <p> Valitse seuraavasta valikosta lisaamisjarjestyksessa lisattavat aineet annokseen</p>
         <form method="POST" action="">
             Raaka-aine:<br/>
+            
+            <select>
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="opel">Opel</option>
+                <option value="audi">Audi</option>
+            </select>
+            
+            
             <ul>
                 <li th:each="aine : ${raakaaineet}">            
                 <select name="raakaaine">

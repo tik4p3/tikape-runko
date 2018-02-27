@@ -92,18 +92,7 @@ public class Main {
 //            res.redirect("/lisaaaine");
 //            return "";
 //        });
-//
-//        // Poistetaan yksittäinen raaka-aine
-//        Spark.post("/poistaraakaaine", (req, res) -> {
-//
-//            Raakaaine raakaaine = new Raakaaine(-1, req.queryParams("nimi"));
-//            raakaaineetDao.saveOrUpdate(raakaaine);
-//
-//            raakaaineetDao.delete(raakaaine.getId());
-//
-//            res.redirect("/poistaraakaaine");
-//            return "";
-//        });
+
 //
 //        
         // ANNOKSET
@@ -180,47 +169,74 @@ public class Main {
 
             raakaaineett = raakaaineetDao.findAll();
             jolaitetut = raakaaineannoksetDao.findAll();
+            
+            map.put("raakaaineet", raakaaineett);
+            map.put("jolaitetut", jolaitetut);
 
 
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "lisaaannos"));
         });
-//
-//        Spark.post("/lisaa-annos", (req, res) -> {
-//
-//            // Haetaan Thymeleafilta tiedot Thymeleafin nimeämisten mukaan
-//            String raakaaine = req.queryParams("raakaaine");
-//            String maara = req.queryParams("maara");
-//            String lisaohje = req.queryParams("lisaohje");
-//
-//            // haetaan nimen perusteella raaka-aine, jos tarvetta?                      *
-//            // Raakaaine raakaaine2 = tarvittavametodi(raakaaine);
-//            
-//            Raakaaine raakaaine2 = 
-//
-//            // Javaan uusi raaka-aineohje, joka myöhemmin lisätään tietokantaan
-//            RaakaaineAnnos raakaaineohje = new RaakaaineAnnos(raakaaine2, maara, lisaohje);
-//            List<RaakaaineAnnos> raakaaineohjeet = new ArrayList();
-//            raakaaineohjeet.add(raakaaineohje);
-//
-//            // Järjestyksen laskeminen ja laittaminen?
-//            raakaaineohje.setJarjestys(raakaaineohjeet.size());
-//
-//            // Tietokantaan laittaminen
-//            
-//            
-//            
-//            
-//            // Sivun päivittäminen
-//            res.redirect("/lisaa-annos");
-//
-//            return "";
-//        });
+
+        Spark.post("/lisaa-annos", (req, res) -> {
+
+            // Haetaan Thymeleafilta tiedot Thymeleafin nimeämisten mukaan
+            String raakaaine = req.queryParams("raakaaine");
+            String lukumaara = req.queryParams("lukumaara");
+            String lisaohje = req.queryParams("lisaohje");
+
+            // haetaan nimen perusteella raaka-aine, jos tarvetta?                      *
+            // Raakaaine raakaaine2 = tarvittavametodi(raakaaine);
+
+            
+            // Sivun päivittäminen
+            res.redirect("/lisaa-annos");
+
+            return "";
+        });
+
+
         Spark.get("/lisaa-aineita", (req, res) -> {
 
             HashMap<String, Object> map = new HashMap();
 
 
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "lisaaaine"));
+        });
+        
+        Spark.post("/lisaa-aineita", (req, res) -> {
+            
+            // poistotoiminnallisuus ei vielä toimi                                             *****
+            
+            if (req.queryParams().contains("poistettava")){
+               Raakaaine raakaaine = new Raakaaine(req.queryParams("poistettava"));
+            raakaaineetDao.saveOrUpdate(raakaaine);
+
+            raakaaineetDao.delete(raakaaine.getId());
+            
+            res.redirect("/lisaa-aineita");
+            }
+            
+            
+            System.out.println("Lisätään ainetta: " + req.queryParams("raakaaine"));
+            
+            raakaaineetDao.saveOrUpdate(req.queryParams("raakaaine"));
+            
+            res.redirect("/lisaa-aineita");
+
+            return "";
+        });
+        
+        
+        // Poistetaan yksittäinen raaka-aine (ei käytössä)
+        Spark.post("/poistaraakaaine", (req, res) -> {
+
+            Raakaaine raakaaine = new Raakaaine(req.queryParams("poistettava"));
+            raakaaineetDao.saveOrUpdate(raakaaine);
+
+            raakaaineetDao.delete(raakaaine.getId());
+
+            res.redirect("/lisaa-aineita");
+            return "";
         });
           
 
