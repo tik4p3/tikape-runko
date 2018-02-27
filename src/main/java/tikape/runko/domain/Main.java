@@ -42,7 +42,12 @@ public class Main {
         //Etusivu
         Spark.get("/keittokirja", (req, res) -> {
             HashMap map = new HashMap<>();
-            map.put("annos",annoksetDao.findAll());
+            
+            
+            List annokset = annoksetDao.findAll();
+            
+            map.put("annos", annokset);
+            System.out.println("Löydetyt annokset: " + annoksetDao.findAll().toString());
 
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "keittokirja"));
         });

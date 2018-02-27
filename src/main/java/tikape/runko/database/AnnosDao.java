@@ -42,7 +42,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
     @Override
     public List<Annos> findAll() throws SQLException {
 
-        List<Annos> annokset;
+        List<Annos> annokset = null;
 
         try (Connection connection = database.getConnection()) {
 
@@ -57,6 +57,10 @@ public class AnnosDao implements Dao<Annos, Integer> {
                 annokset.add(annos);
 
             }
+            
+            System.out.println("AnnosDao findAll suoritti kyselyn " + rs.toString());
+            System.out.println("Luotiin lista, jonka viimeisen olion indeksi on: " + annokset.lastIndexOf(rs));
+            System.out.println("resultsetin koko: " + rs.getFetchSize());
             
             stmt.close();
             rs.close();
