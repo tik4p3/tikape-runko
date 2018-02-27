@@ -187,6 +187,10 @@ public class Main {
             System.out.println("(Main, lisaa-annos) Saatiin seuraavat: " + 
                     raakaaine + " (raaka-aine), " + lukumaara + 
                     " (määrä), ja " + lisaohje + " (lisäohje)");
+            
+            int id = raakaaineetDao.findId(raakaaine);
+            Raakaaine aine = raakaaineetDao.findOne(id);
+            
 
             // haetaan nimen perusteella raaka-aine, jos tarvetta?                      *
             // Raakaaine raakaaine2 = tarvittavametodi(raakaaine);

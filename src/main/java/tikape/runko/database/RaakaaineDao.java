@@ -100,5 +100,40 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
         stmt.close();
         conn.close();
     }
+    
+    public int findId (String aine) throws SQLException   {
+        int id = -1;
+        
+        List<Raakaaine> raakaaineet;
+
+        try (Connection connection = database.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Raakaaine");
+            ResultSet rs = stmt.executeQuery();
+            raakaaineet = new ArrayList<>();
+            while (rs.next()) {
+
+                Raakaaine raakaaine = new Raakaaine(rs.getInt("id"), rs.getString("nimi"));
+
+                raakaaineet.add(raakaaine);
+
+            }
+            stmt.close();
+            rs.close();
+            
+            
+            for (Raakaaine raakaaine : raakaaineet) {
+                if (raakaaine.getNimi().equals(aine))    {
+                    id = raakaaine.getId();
+                    
+                    System.out.println("(RaakaaineDao, findId) Löydettiin oikea avain");
+                }
+            }
+            
+        }
+        
+        
+        return id;
+    }
 
 }
