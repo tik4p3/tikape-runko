@@ -56,7 +56,7 @@ public class Main {
             
             List<Annos> annokset = annoksetDao.findAll();
             
-            map.put("annos", annokset);
+            map.put("annokset", annokset);
                for (Annos annos : annokset)   {
                 System.out.println(" (Main) " + annos.getId() + "|" + annos.getNimi());
             }
