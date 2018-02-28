@@ -1,4 +1,3 @@
-# tikape-runko
-
-Tietokantojen perusteet -kurssilla tehtävän web-sovelluksen pohja.
+Linkki Heroku-sovellukseen:
+https://tik4p3menu.herokuapp.com/
 
