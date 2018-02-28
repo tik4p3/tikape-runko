@@ -95,6 +95,18 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
         stmt.close();
         conn.close();
     }
+    // en tiedä onko tästä apua 
+    public void poistaRaakaaineenMukaan(int poistettavanId) throws SQLException {
+        
+        Connection conn = database.getConnection();
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM RaakaaineAnnos WHERE raakaaine_id = ?");
+
+        stmt.setInt(1, poistettavanId);
+        stmt.executeUpdate();
+
+        stmt.close();
+        conn.close();
+    }
 
    
 

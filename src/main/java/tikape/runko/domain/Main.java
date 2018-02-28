@@ -86,7 +86,7 @@ public class Main {
             Raakaaine raakaaine = new Raakaaine(-1, req.queryParams("raakaaine"));
             raakaaineDao.saveOrUpdate(raakaaine);
 
-            res.redirect("/lisaaaine");
+            res.redirect("/lisaa-aineita");
             return "";
         });
 
@@ -216,13 +216,22 @@ public class Main {
 
         Spark.post("/lisaa-aineita", (req, res) -> {
 
-            // poistotoiminnallisuus ei vielä toimi                                             *****
-            if (req.queryParams().contains("poistettava")) {
+            // poistotoiminnallisuus ei vielä toimi
+            if (!req.queryParams("poistettava").isEmpty()) {
+                // poistettavan raaka-aineen id saadaan suoraan selville
+                int poistettavanId = Integer.parseInt(req.queryParams("poistettava"));
+
+                // raaka-aine on poistettava ensin annoksista, joissa se on käytössä
+                raakaaineAnnosDao.poistaRaakaaineenMukaan(poistettavanId);
+
+                //poistetaan lopuksi raaka-aine tietokannasta
+                raakaaineDao.delete(poistettavanId);
+
+                /*Alkuperäinen versio:
                 Raakaaine raakaaine = new Raakaaine(req.queryParams("poistettava"));
                 raakaaineDao.saveOrUpdate(raakaaine);
-
-                raakaaineDao.delete(raakaaine.getId());
-
+                
+                raakaaineDao.delete(raakaaine.getId());*/
                 res.redirect("/lisaa-aineita");
             }
 

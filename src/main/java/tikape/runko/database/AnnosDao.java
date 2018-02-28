@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Annos;
 import tikape.runko.domain.Database;
+import tikape.runko.domain.Raakaaine;
 
 public class AnnosDao implements Dao<Annos, Integer> {
 
@@ -42,7 +43,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
     @Override
     public List<Annos> findAll() throws SQLException {
 
-        List<Annos> annokset = null;
+        List<Annos> annokset = new ArrayList<>();;
 
         try (Connection connection = database.getConnection()) {
             
@@ -52,15 +53,12 @@ public class AnnosDao implements Dao<Annos, Integer> {
             
             System.out.println("AnnosDao findAll suoritti kyselyn " + rs.toString());
             
-            annokset = new ArrayList<>();
-            
             while (rs.next()) {
 
                 Annos annos = new Annos(rs.getInt("id"), rs.getString("nimi"));
                 annokset.add(annos);
 
             }
-            
             
             System.out.println("(AnnosDao) Onko Javaan luotu lista tyhjä: " + annokset.isEmpty());
             for (Annos annos : annokset)   {
@@ -70,6 +68,7 @@ public class AnnosDao implements Dao<Annos, Integer> {
             
             stmt.close();
             rs.close();
+            connection.close();
         }
 
         return annokset;
@@ -80,12 +79,33 @@ public class AnnosDao implements Dao<Annos, Integer> {
     public Annos saveOrUpdate(Annos object) throws SQLException {
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (id, nimi) VALUES (?, ?)");
-            stmt.setInt(1, object.getId());
-            stmt.setString(2, object.getNimi());
-            stmt.executeUpdate();
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (id, nimi) VALUES (?, ?)");
+        stmt.setInt(1, object.getId());
+        stmt.setString(2, object.getNimi());
+        stmt.executeUpdate();
         }
 
+//        Samanlainen kuin RaakaaineDaon metodi
+//        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (nimi) VALUES (?)");
+//        stmt.setString(1, object.getNimi());
+//        stmt.executeUpdate();
+//        stmt.close();
+//
+//        PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM Annos WHERE nimi = ?");
+//        stmt2.setString(1, object.getNimi());
+//        ResultSet rs = stmt2.executeQuery();
+//
+//        //siirrytään seuraavalle riville
+//        rs.next();
+//
+//        //tehdään annos joka voidaan palauttaa
+//        Annos annos = new Annos(rs.getInt("id"), rs.getString("nimi"));
+//
+//        stmt2.close();
+//        rs.close();
+//        conn.close();
+//        
+//        return annos;
         return null;
     }
 

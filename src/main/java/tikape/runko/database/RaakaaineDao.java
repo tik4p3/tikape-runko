@@ -66,7 +66,9 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
         return raakaaineet;
 
     }
-
+    
+    // Tämä metodi näyttäisi luovan nyt lisätylle raaka-aineelle uuden id:n automaattisesti,
+    // mutta antaa lisätä useita samannimisiä raaka-aineita tietokantaan, mikä saattaa tuoda ongelmia
     @Override
     public Raakaaine saveOrUpdate(Raakaaine object) throws SQLException {
 
@@ -98,7 +100,7 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
     public Raakaaine saveOrUpdate(String nimi) throws SQLException {
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raakaaine (nimi) VALUES (?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaAine (nimi) VALUES (?)");
             stmt.setString(1, nimi);
             stmt.executeUpdate();
         }
@@ -110,7 +112,7 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
     public void delete(Integer key) throws SQLException {
 
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Raakaaine WHERE id = ?");
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM RaakaAine WHERE id = ?");
 
         stmt.setInt(1, key);
         stmt.executeUpdate();

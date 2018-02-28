@@ -4,10 +4,12 @@ package tikape.runko.domain;
 public class RaakaaineAnnos {
 
     private Raakaaine raakaaine;
+    private Annos annos;
     private String maara;
     private String lisaohje;
     private int jarjestys;
-
+    
+    // tarvitaankohan näitä
     private int raakaaine_id;
     private int annos_id;
 
@@ -26,18 +28,24 @@ public class RaakaaineAnnos {
         this.lisaohje = lisaohje;
     }
     
-       
-       
+    // uusi konstruktori
+    public RaakaaineAnnos(Annos annos, Raakaaine raakaaine, int jarjestys, String maara, String lisaohje) {
+        this.annos = annos;
+        this.raakaaine = raakaaine;
+        this.jarjestys = jarjestys;
+        this.maara = maara;
+        this.lisaohje = lisaohje;
+    }
     
 
-//    public RaakaaineAnnos(Raakaaine raakaaine, String maara) {
-//        this.raakaaine = raakaaine;
-//        this.maara = maara;
-//    }
-//    public Raakaaine getRaakaaine() {
-//        return raakaaine;
-//    }
+    public Raakaaine getRaakaaine() {
+        return raakaaine;
+    }
 
+    public Annos getAnnos() {
+        return annos;
+    }
+    
     public int getRaakaaineId(){
         return raakaaine_id;      
     }
@@ -60,10 +68,6 @@ public class RaakaaineAnnos {
 
     public void setJarjestys(int jarjestys) {
         this.jarjestys = jarjestys;
-    }
-
-    public void setRaakaaine(Raakaaine raakaaine) {
-        this.raakaaine = raakaaine;
     }
 
     public void setMaara(String maara) {
