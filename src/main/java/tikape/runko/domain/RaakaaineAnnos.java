@@ -11,6 +11,7 @@ public class RaakaaineAnnos {
     private int raakaaine_id;
     private int annos_id;
 
+
     public RaakaaineAnnos(Integer raakaaine_id, Integer annos_id) {
         this.raakaaine_id = raakaaine_id;
         this.annos_id = annos_id;
@@ -18,6 +19,16 @@ public class RaakaaineAnnos {
         this.maara = maara;
         this.lisaohje = lisaohje;
     }
+    
+    public RaakaaineAnnos(Integer raakaaine_id, String maara, String lisaohje) {
+        this.raakaaine_id = raakaaine_id;
+        this.maara = maara;
+        this.lisaohje = lisaohje;
+    }
+    
+       
+       
+    
 
 //    public RaakaaineAnnos(Raakaaine raakaaine, String maara) {
 //        this.raakaaine = raakaaine;

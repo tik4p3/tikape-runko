@@ -1,7 +1,6 @@
 package tikape.runko.domain;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,6 +40,12 @@ public class Main {
         RaakaaineDao raakaaineetDao = new RaakaaineDao(database);
         RaakaaineAnnosDao raakaaineannoksetDao = new RaakaaineAnnosDao(database);
         AnnosDao annoksetDao = new AnnosDao(database);
+        
+       
+        // Lisää annoksen lista, jossa on valitut raaka-aineet, mutta vielä niin, että niitä ei lisätä tietokantaan
+        // Näin ei tarvitse esimerkiksi annosId-tunnusta olla, kun sitä ei vielä edes ole
+        List<Jolaitettu> jolaitettuja = new ArrayList();
+        
 
         // Tämä ryhmitelty sivujen mukaan - etusivu ja neljä tai viisi muuta sivua
         // Jokaisella sivulla Sparkin get ja post -metodit, vaikka en olisi niille käyttöä keksinyt
@@ -165,13 +170,14 @@ public class Main {
 
             HashMap<String, Object> map = new HashMap();
             List<Raakaaine> raakaaineett = new ArrayList();
-            List<RaakaaineAnnos> jolaitetut = new ArrayList();
+            
 
             raakaaineett = raakaaineetDao.findAll();
-            jolaitetut = raakaaineannoksetDao.findAll();
             
             map.put("raakaaineet", raakaaineett);
-            map.put("jolaitetut", jolaitetut);
+            map.put("jolaitetut", jolaitettuja);
+            
+            System.out.println("(Main, get lisaa-annos) mappiin lisätty raakaaineet ja jolaitetut");
 
 
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "lisaaannos"));
@@ -189,12 +195,22 @@ public class Main {
                     " (määrä), ja " + lisaohje + " (lisäohje)");
             
             int id = raakaaineetDao.findId(raakaaine);
+            System.out.println("(Main, lisaa-annos) Id on: " + id);
             Raakaaine aine = raakaaineetDao.findOne(id);
             
+            
+            jolaitettuja.add(new Jolaitettu(aine, aine.getNimi(), lisaohje, lukumaara));
 
-            // haetaan nimen perusteella raaka-aine, jos tarvetta?                      *
-            // Raakaaine raakaaine2 = tarvittavametodi(raakaaine);
+            
+            // Sivun päivittäminen
+            res.redirect("/lisaa-annos");
 
+            return "";
+        });
+        
+        Spark.post("/lisaa-annos/lisataan", (req, res) -> {
+
+           
             
             // Sivun päivittäminen
             res.redirect("/lisaa-annos");

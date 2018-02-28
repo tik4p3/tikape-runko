@@ -17,7 +17,7 @@
         <title>Annoksen koostaminen </title>
     </head>
     <body>
-        <h1> Raaka-aineiden valitseminen</h1>
+        <h1> Uuden annoksen luominen </h1>
         <p> Valitse seuraavasta valikosta lisaamisjarjestyksessa lisattavat aineet annokseen</p>
         <form method="POST" action="">
             Raaka-aine:<br/>
@@ -42,9 +42,9 @@
                 Lisaohje raaka-aineelle:<br/>
                 <input type="text" name="lisaohje"/>
                 <input type="submit" value="Lisaa valittu raaka-aine"/> 
-                            
+        </form>                    
             <ol>
-                <li th:each="aine : ${ehdotetutAineet}">
+                <li th:each="aine : ${jolaitetut}">
                     <span th:text="${aine.nimi}">Raaka-aineet</span>
                 </li>
             </ol>
@@ -53,7 +53,7 @@
                 Annoksen nimi:<br/>
                 <input type="text" name="nimi"/><br/>
             <br/>
-            <form method="POST" action="/????">
+            <form method="POST" action="/lisaa-annos/lisataan">
                 <input type="submit" value="Lisaa annos Keittokirjaan"/><br/>
             </form>
             <br/>
@@ -62,7 +62,7 @@
                 <a th:href="@{~/keittokirja}">Siirry keittokirjan paasivulle!</a>
             </li>
         </ul>
-        </form>
+        
     </body>  
 </html>
 

@@ -31,6 +31,8 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
         }
 
         Raakaaine raakaaine = new Raakaaine(rs.getInt("id"), rs.getString("nimi"));
+        
+        System.out.println("löytyi raakaaine: " + rs.getInt("id") +"|" + rs.getString("nimi"));
 
         stmt.close();
         rs.close();
@@ -104,6 +106,8 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
     public int findId (String aine) throws SQLException   {
         int id = -1;
         
+        System.out.println("(RaakaaineDao) Etsitään ainetta: " + aine);
+        
         List<Raakaaine> raakaaineet;
 
         try (Connection connection = database.getConnection()) {
@@ -112,8 +116,12 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
             ResultSet rs = stmt.executeQuery();
             raakaaineet = new ArrayList<>();
             while (rs.next()) {
-
-                Raakaaine raakaaine = new Raakaaine(rs.getInt("id"), rs.getString("nimi"));
+                
+                int loydettyId = rs.getInt("id");
+                String loydettyNimi = rs.getString("nimi");
+                
+                System.out.println("(RaakaaineDao, findId) Löytyi raaka-aine: " + loydettyId + "|" + loydettyNimi);
+                Raakaaine raakaaine = new Raakaaine(loydettyId, loydettyNimi);
 
                 raakaaineet.add(raakaaine);
 
@@ -126,7 +134,7 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
                 if (raakaaine.getNimi().equals(aine))    {
                     id = raakaaine.getId();
                     
-                    System.out.println("(RaakaaineDao, findId) Löydettiin oikea avain");
+                    System.out.println("(RaakaaineDao, findId) Löydettiin oikea avain: " + id);
                 }
             }
             
