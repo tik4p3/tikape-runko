@@ -5,12 +5,14 @@ Raaka-aineita haetaan raaka-aineet listasta
         <title>Lisaa ja tarkastele </title>
     </head>
     <body>
-        <h1> Kaytossa olevat raaka-aineet</h1>    
+        <h1> Käytössa olevat raaka-aineet</h1>    
         <ul>
             <li th:each="aine : ${raakaaineet}">
                 <span th:text="${aine.nimi}">Raaka-aineet</span><br/>
+          <!--  Ei tarvita:
                 <span th:text="${aine.maara}">maara</span><br/>
-                <span th:text="${aine.lisaohje}">lisaohje</span><br/>    
+                <span th:text="${aine.lisaohje}">lisaohje</span><br/>  
+          -->  
             </li>
         </ul>
         <p>Lisaa raaka-aineita Keittokirjaan</p>
@@ -20,7 +22,8 @@ Raaka-aineita haetaan raaka-aineet listasta
                 <br/>
                 <input type="submit" value="Lisaa raaka-aine Keittokirjaan"/><br/>
             </form>
-            <p>Poista raaka-aineita Keittokirjasta</p>
+            
+        <p>Poista raaka-aineita Keittokirjasta</p>
             <form method="POST" action="/lisaa-aineita">
                 Raaka-aine:<br/>
                 <input type="text" name="poistettava"/>   
