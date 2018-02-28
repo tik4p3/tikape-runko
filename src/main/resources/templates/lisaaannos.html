@@ -6,17 +6,19 @@
     </head>    
     <body>
         <h1>Uuden annoksen lisääminen Keittokirjaan</h1>
-            <br/> Kirjoita lisättävän annoksen nimi <br/>
         <br/>
-                Annoksen nimi:<br/>
-                <input type="text" name="nimi"/><br/>
-            <br/>
+            <form method="POST" action="???">
+                Kirjoita lisättävän annoksen nimi:<br/>
+                <input type="text" name="annos"/>   
+                <br/>
                 <input type="submit" value="Lisää Keittokirjaan"/><br/>
+            </form>
+
         <br/>
         
         <h2> Raaka-aineiden valitseminen lisäämääsi annokseen</h2>
         <p> Valitse seuraavasta valikosta lisäämisjärjestyksessä lisättävät aineet annokseen</p>
-        <form method="POST" action="???">
+        <form method="POST" action="????">
             Raaka-aine:<br/>
             <ul>
                 <li th:each="aine : ${raakaaineet}">            
@@ -25,7 +27,6 @@
                 </select>
                 </li>
             </ul>
-            </form>
             <br/>
                 Määrä:<br/>
                 <input type="text" name="lukumaara"/><br/>
@@ -39,11 +40,11 @@
                     <span th:text="${aine.nimi}">Raaka-aineet</span>
                 </li>
             </ol>
-        <ul>
+        </form>
+            <ul>
             <li>
                 <a th:href="@{~/keittokirja}">Siirry keittokirjan paasivulle!</a>
             </li>
-        </ul>        
+        </ul>
     </body>  
 </html>
-
