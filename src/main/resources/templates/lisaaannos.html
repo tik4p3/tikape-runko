@@ -1,61 +1,44 @@
 <!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-   <!-- Droppi valikko: Lista jo olemassa olevista raaka-aineista = raakaaineet
-    Kun raaka-aine valitaan, se lisaantyy listaan: valitutaineet (tahan button: lisaa?)
-    (jarjestysnumero lukee annoksen tiedoissa (lisaamisjarjestys))
-    Teksti: [Maara]
-    Tekstikentta: lukumaara
-    Teksti: [Lisaohje raaka-aineille]
-    Tekstikentta: lisaohje
-    Button: lisaa valLista: valitut raaka-aineetittu raaka-aine (paivittaa sivun ja lisaa raaka-aineet ehdotetutAineet-listaan)
-    Lista: valitut raaka-aineet
-    Teksti: [Anna annokselle nimi]
-    Tekstikentta: annoksenNimi
-    Button: uusiAnnos -->
-   
+  
     <head>
         <title>Annoksen koostaminen </title>
-    </head>
+    </head>    
     <body>
-        <h1> Uuden annoksen luominen </h1>
-        <p> Valitse seuraavasta valikosta lisaamisjarjestyksessa lisattavat aineet annokseen</p>
+        <h1>Uuden annoksen lisääminen Keittokirjaan</h1>
+            <br/> Kirjoita lisättävän annoksen nimi <br/>
+        <br/>
+                Annoksen nimi:<br/>
+                <input type="text" name="nimi"/><br/>
+            <br/>
+                <input type="submit" value="Lisää Keittokirjaan"/><br/>
+        <br/>
+        
+        <h2> Raaka-aineiden valitseminen lisäämääsi annokseen</h2>
+        <p> Valitse seuraavasta valikosta lisäämisjärjestyksessä lisättävät aineet annokseen</p>
         <form method="POST" action="">
             Raaka-aine:<br/>
-            
-            
-            <div>
-                <select name = "raakaaine">
-                    <option th:each="aine : ${raakaaineet}"
-                            th:value="${aine.nimi}"
-                            th:text="${aine.nimi}"
-                            label = "label" 
-                            />
-                    
+            <ul>
+                <li th:each="aine : ${raakaaineet}">            
+                <select name="raakaaine">
+                    <option name="${aine.nimi}">Raaka-aine</option>                    
                 </select>
-            </div>
-            
-
+                </li>
+            </ul>
             <br/>
-                Maara:<br/>
+                Määrä:<br/>
                 <input type="text" name="lukumaara"/><br/>
             <br/>
-                Lisaohje raaka-aineelle:<br/>
+                Lisäohje raaka-aineelle:<br/>
                 <input type="text" name="lisaohje"/>
-                <input type="submit" value="Lisaa valittu raaka-aine"/> 
-        </form>                    
+                <input type="submit" value="Lis&auml&auml valittu raaka-aine"/> 
+                            
             <ol>
-                <li th:each="aine : ${jolaitetut}">
+                <li th:each="aine : ${ehdotetutAineet}">
                     <span th:text="${aine.nimi}">Raaka-aineet</span>
                 </li>
             </ol>
-        <br/> Jos olet tyytyvainen raaka-aineisiin, anna annokselle nimi ja lisaa se Keittokirjaan
-            <br/>
-            <form method="POST" action="/lisaa-annos/lisataan">
-                Annoksen nimi:<br/>
-                <input type="text" name="nimi"/><br/>
-                <input type="submit" value="Lisaa annos Keittokirjaan"/><br/>
-            </form>
-            <br/>
+            <ul>
         <ul>
             <li>
                 <a th:href="@{~/keittokirja}">Siirry keittokirjan paasivulle!</a>
