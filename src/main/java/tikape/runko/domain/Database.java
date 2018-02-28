@@ -30,9 +30,9 @@ public class Database {
             return connection;
         }
         
-        //Connection connection = DriverManager.getConnection("jdbc:sqlite:kirja.db");
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:kirja.db");
         
-        //System.out.println("otettiin yhteys SQLite-tietokantaan (kirja.db)");
+        System.out.println("otettiin yhteys SQLite-tietokantaan (kirja.db)");
         
        
 
