@@ -16,7 +16,7 @@
         
         <h2> Raaka-aineiden valitseminen lisäämääsi annokseen</h2>
         <p> Valitse seuraavasta valikosta lisäämisjärjestyksessä lisättävät aineet annokseen</p>
-        <form method="POST" action="">
+        <form method="POST" action="???">
             Raaka-aine:<br/>
             <ul>
                 <li th:each="aine : ${raakaaineet}">            
@@ -25,6 +25,7 @@
                 </select>
                 </li>
             </ul>
+            </form>
             <br/>
                 Määrä:<br/>
                 <input type="text" name="lukumaara"/><br/>
@@ -47,5 +48,4 @@
         
     </body>  
 </html>
-
 
