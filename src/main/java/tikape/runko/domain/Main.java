@@ -37,9 +37,9 @@ public class Main {
         
 
 
-        RaakaaineDao raakaaineetDao = new RaakaaineDao(database);
-        RaakaaineAnnosDao raakaaineannoksetDao = new RaakaaineAnnosDao(database);
-        AnnosDao annoksetDao = new AnnosDao(database);
+        RaakaaineDao raakaaineDao = new RaakaaineDao(database);
+        RaakaaineAnnosDao raakaaineAnnosDao = new RaakaaineAnnosDao(database);
+        AnnosDao annosDao = new AnnosDao(database);
         
        
         // Lisää annoksen lista, jossa on valitut raaka-aineet, mutta vielä niin, että niitä ei lisätä tietokantaan
@@ -59,7 +59,7 @@ public class Main {
             HashMap map = new HashMap<>();
             
             
-            List<Annos> annokset = annoksetDao.findAll();
+            List<Annos> annokset = annosDao.findAll();
             
             map.put("annokset", annokset);
                for (Annos annos : annokset)   {
@@ -72,7 +72,7 @@ public class Main {
         Spark.get("/annoslistaus/:id", (req, res) -> {
             HashMap map = new HashMap<>();
 
-            map.put("annos", annoksetDao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("annos", annosDao.findOne(Integer.parseInt(req.params("id"))));
 
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
@@ -80,32 +80,32 @@ public class Main {
 
 //        // RAAKA-AINEET
 //        // Haetaan kaikki raaka-aineet
-//        Spark.get("/haeaineet", (req, res) -> {
-//
-//            HashMap<String, Object> map = new HashMap();
-//            map.put("raakaaineet", raakaaineetDao.findAll());
-//
-//            return new ModelAndView(map, "lisaaaine");
-//        }, new ThymeleafTemplateEngine());
-//
-//        // Lisätään raaka-aine
-//        Spark.post("/lisaaaine", (req, res) -> {
-//
-//            Raakaaine raakaaine = new Raakaaine(-1, req.queryParams("nimi"));
-//            raakaaineetDao.saveOrUpdate(raakaaine);
-//
-//            res.redirect("/lisaaaine");
-//            return "";
-//        });
+        Spark.get("/haeaineet", (req, res) -> {
 
-//
-//        
+            HashMap<String, Object> map = new HashMap();
+            map.put("raakaaineet", raakaaineDao.findAll());
+
+            return new ModelAndView(map, "lisaaaine");
+        }, new ThymeleafTemplateEngine());
+
+        // Lisätään raaka-aine
+        Spark.post("/lisaa-aineita", (req, res) -> {
+
+            Raakaaine raakaaine = new Raakaaine(-1, req.queryParams("raakaaine"));
+            raakaaineDao.saveOrUpdate(raakaaine);
+
+            res.redirect("/lisaaaine");
+            return "";
+        });
+
+
+        
         // ANNOKSET
         // Haetaan kaikki annokset
         Spark.get("/annoslistaus", (req, res) -> {
 
             HashMap<String, Object> map = new HashMap();
-            map.put("annokset", annoksetDao.findAll());
+            map.put("annokset", annosDao.findAll());
 
             return new ModelAndView(map, "annokset");
         }, new ThymeleafTemplateEngine());
@@ -114,7 +114,7 @@ public class Main {
         Spark.post("/annoslistaus", (req, res) -> {
 
             Annos annos = new Annos(-1, req.queryParams("nimi"));
-            annoksetDao.saveOrUpdate(annos);
+            annosDao.saveOrUpdate(annos);
 
             res.redirect("/annoslistaus");
             return "";
@@ -172,7 +172,7 @@ public class Main {
             List<Raakaaine> raakaaineett = new ArrayList();
             
 
-            raakaaineett = raakaaineetDao.findAll();
+            raakaaineett = raakaaineDao.findAll();
             
             map.put("raakaaineet", raakaaineett);
             map.put("jolaitetut", jolaitettuja);
@@ -194,9 +194,9 @@ public class Main {
                     raakaaine + " (raaka-aine), " + lukumaara + 
                     " (määrä), ja " + lisaohje + " (lisäohje)");
             
-            int id = raakaaineetDao.findId(raakaaine);
+            int id = raakaaineDao.findId(raakaaine);
             System.out.println("(Main, lisaa-annos) Id on: " + id);
-            Raakaaine aine = raakaaineetDao.findOne(id);
+            Raakaaine aine = raakaaineDao.findOne(id);
             
             
             jolaitettuja.add(new Jolaitettu(aine, aine.getNimi(), lisaohje, lukumaara));
@@ -235,9 +235,9 @@ public class Main {
             
             if (req.queryParams().contains("poistettava")){
                Raakaaine raakaaine = new Raakaaine(req.queryParams("poistettava"));
-            raakaaineetDao.saveOrUpdate(raakaaine);
+            raakaaineDao.saveOrUpdate(raakaaine);
 
-            raakaaineetDao.delete(raakaaine.getId());
+            raakaaineDao.delete(raakaaine.getId());
             
             res.redirect("/lisaa-aineita");
             }
@@ -245,7 +245,7 @@ public class Main {
             
             System.out.println("Lisätään ainetta: " + req.queryParams("raakaaine"));
             
-            raakaaineetDao.saveOrUpdate(req.queryParams("raakaaine"));
+            raakaaineDao.saveOrUpdate(req.queryParams("raakaaine"));
             
             res.redirect("/lisaa-aineita");
 
@@ -257,9 +257,9 @@ public class Main {
         Spark.post("/poistaraakaaine", (req, res) -> {
 
             Raakaaine raakaaine = new Raakaaine(req.queryParams("poistettava"));
-            raakaaineetDao.saveOrUpdate(raakaaine);
+            raakaaineDao.saveOrUpdate(raakaaine);
 
-            raakaaineetDao.delete(raakaaine.getId());
+            raakaaineDao.delete(raakaaine.getId());
 
             res.redirect("/lisaa-aineita");
             return "";

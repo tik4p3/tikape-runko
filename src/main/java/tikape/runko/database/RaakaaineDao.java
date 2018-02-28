@@ -13,7 +13,7 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
 
     private Database database;
 
-    public RaakaaineDao(Database database)  {
+    public RaakaaineDao(Database database) {
         this.database = database;
     }
 
@@ -31,8 +31,8 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
         }
 
         Raakaaine raakaaine = new Raakaaine(rs.getInt("id"), rs.getString("nimi"));
-        
-        System.out.println("löytyi raakaaine: " + rs.getInt("id") +"|" + rs.getString("nimi"));
+
+        System.out.println("löytyi raakaaine: " + rs.getInt("id") + "|" + rs.getString("nimi"));
 
         stmt.close();
         rs.close();
@@ -44,23 +44,24 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
     @Override
     public List<Raakaaine> findAll() throws SQLException {
 
-        List<Raakaaine> raakaaineet;
+        List<Raakaaine> raakaaineet = new ArrayList<>();
 
-        try (Connection connection = database.getConnection()) {
+        Connection conn = database.getConnection();
 
-            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Raakaaine");
-            ResultSet rs = stmt.executeQuery();
-            raakaaineet = new ArrayList<>();
-            while (rs.next()) {
+        PreparedStatement stmt = conn.prepareStatement("SELECT * FROM Raakaaine");
+        ResultSet rs = stmt.executeQuery();
 
-                Raakaaine raakaaine = new Raakaaine(rs.getInt("id"), rs.getString("nimi"));
+        while (rs.next()) {
 
-                raakaaineet.add(raakaaine);
+            Raakaaine raakaaine = new Raakaaine(rs.getInt("id"), rs.getString("nimi"));
 
-            }
-            stmt.close();
-            rs.close();
+            raakaaineet.add(raakaaine);
+
         }
+
+        stmt.close();
+        rs.close();
+        conn.close();
 
         return raakaaineet;
 
@@ -69,17 +70,32 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
     @Override
     public Raakaaine saveOrUpdate(Raakaaine object) throws SQLException {
 
-        try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raakaaine (id, nimi) VALUES (?, ?)");
-            stmt.setInt(1, object.getId());
-            stmt.setString(2, object.getNimi());
-            stmt.executeUpdate();
-        }
+        Connection conn = database.getConnection();
 
-        return null;
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raakaaine (nimi) VALUES (?)");
+        /*stmt.setInt(1, object.getId());*/
+        stmt.setString(1, object.getNimi());
+        stmt.executeUpdate();
+        stmt.close();
+
+        PreparedStatement stmt2 = conn.prepareStatement("SELECT * FROM Raakaaine WHERE nimi = ?");
+        stmt2.setString(1, object.getNimi());
+        ResultSet rs = stmt2.executeQuery();
+
+        //siirrytään seuraavalle riville
+        rs.next();
+
+        //tehdään raaka-aine joka voidaan palauttaa
+        Raakaaine raakaaine = new Raakaaine(rs.getInt("id"), rs.getString("nimi"));
+
+        stmt2.close();
+        rs.close();
+        conn.close();
+        
+        return raakaaine;
     }
-    
-        public Raakaaine saveOrUpdate(String nimi) throws SQLException {
+
+    public Raakaaine saveOrUpdate(String nimi) throws SQLException {
 
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raakaaine (nimi) VALUES (?)");
@@ -102,12 +118,12 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
         stmt.close();
         conn.close();
     }
-    
-    public int findId (String aine) throws SQLException   {
+
+    public int findId(String aine) throws SQLException {
         int id = -1;
-        
+
         System.out.println("(RaakaaineDao) Etsitään ainetta: " + aine);
-        
+
         List<Raakaaine> raakaaineet;
 
         try (Connection connection = database.getConnection()) {
@@ -116,10 +132,10 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
             ResultSet rs = stmt.executeQuery();
             raakaaineet = new ArrayList<>();
             while (rs.next()) {
-                
+
                 int loydettyId = rs.getInt("id");
                 String loydettyNimi = rs.getString("nimi");
-                
+
                 System.out.println("(RaakaaineDao, findId) Löytyi raaka-aine: " + loydettyId + "|" + loydettyNimi);
                 Raakaaine raakaaine = new Raakaaine(loydettyId, loydettyNimi);
 
@@ -128,19 +144,17 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
             }
             stmt.close();
             rs.close();
-            
-            
+
             for (Raakaaine raakaaine : raakaaineet) {
-                if (raakaaine.getNimi().equals(aine))    {
+                if (raakaaine.getNimi().equals(aine)) {
                     id = raakaaine.getId();
-                    
+
                     System.out.println("(RaakaaineDao, findId) Löydettiin oikea avain: " + id);
                 }
             }
-            
+
         }
-        
-        
+
         return id;
     }
 

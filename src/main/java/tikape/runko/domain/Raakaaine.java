@@ -12,8 +12,8 @@ public class Raakaaine {
     private String nimi;
 
     public Raakaaine(int id, String nimi) {
-        this.nimi = nimi;
         this.id = id;
+        this.nimi = nimi;
         
         System.out.println("(Raakaaine, konstruktori 1) Lisättiin raaka-aine: " + this.id + "|" + this.nimi);
     }
