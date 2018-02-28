@@ -48,12 +48,11 @@
                     <span th:text="${aine.nimi}">Raaka-aineet</span>
                 </li>
             </ol>
-            <br/> Jos olet tyytyvainen raaka-aineisiin, anna annokselle nimi ja lisaa se Keittokirjaan
-            <br/>
-                Annoksen nimi:<br/>
-                <input type="text" name="nimi"/><br/>
+        <br/> Jos olet tyytyvainen raaka-aineisiin, anna annokselle nimi ja lisaa se Keittokirjaan
             <br/>
             <form method="POST" action="/lisaa-annos/lisataan">
+                Annoksen nimi:<br/>
+                <input type="text" name="nimi"/><br/>
                 <input type="submit" value="Lisaa annos Keittokirjaan"/><br/>
             </form>
             <br/>

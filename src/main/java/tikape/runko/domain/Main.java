@@ -209,8 +209,10 @@ public class Main {
         });
         
         Spark.post("/lisaa-annos/lisataan", (req, res) -> {
+            
+            String AnnosNimi = req.queryParams("nimi");
 
-           
+            System.out.println("(Main /lisaa-annos/lisataan, post) Lisätään annosta: " + AnnosNimi);
             
             // Sivun päivittäminen
             res.redirect("/lisaa-annos");
