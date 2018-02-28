@@ -8,15 +8,24 @@
         <h1>Uuden annoksen lisääminen Keittokirjaan</h1>
         <br/>
             <form method="POST" action="???">
-                Kirjoita lisättävän annoksen nimi:<br/>
+                Kirjoita Keittokirjaan lisättävän annoksen nimi:<br/>
                 <input type="text" name="annos"/>   
                 <br/>
                 <input type="submit" value="Lisää Keittokirjaan"/><br/>
             </form>
-
-        <br/>
+        <p> Valitse, mihin annokseen haluat lisätä raaka-aineet. Voit tässä myös lisätä raaka-aineita jo olemassaoleviin annoksiin</p>
         
-        <h2> Raaka-aineiden valitseminen lisäämääsi annokseen</h2>
+        <form method="POST" action="????">
+            Annos:<br/>
+            <ul>
+                <li th:each="annos : ${annokset}">            
+                <select name="annos">
+                    <option name="${annos.nimi}">Annos</option>                    
+                </select>
+                </li>
+            </ul>
+        </form>
+        <h2> Raaka-aineiden valitseminen edellä valitsemaasi annokseen</h2>
         <p> Valitse seuraavasta valikosta lisäämisjärjestyksessä lisättävät aineet annokseen</p>
         <form method="POST" action="????">
             Raaka-aine:<br/>
