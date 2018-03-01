@@ -5,15 +5,15 @@
         <title>Annoksen koostaminen </title>
     </head>    
     <body>
-        <h1>Uuden annoksen lisääminen Keittokirjaan</h1>
+        <h1>Uuden annoksen lis&auml;&auml;minen Keittokirjaan</h1>
         <br/>
             <form method="POST" action="/lisaa-annos"> <!-- lisätty /lisaa-annos-->
-                Kirjoita Keittokirjaan lisättävän annoksen nimi:<br/>
+                Kirjoita Keittokirjaan lis&auml;tt&auml;v&auml;n annoksen nimi:<br/>
                 <input type="text" name="annos"/>   
                 <br/>
-                <input type="submit" value="Lisää Keittokirjaan"/><br/>
+                <input type="submit" value="Lis&auml;&auml; Keittokirjaan"/><br/>
             </form>
-        <p> Valitse, mihin annokseen haluat lisätä raaka-aineet. Voit tässä myös lisätä raaka-aineita jo olemassaoleviin annoksiin</p>
+        <p> Valitse, mihin annokseen haluat lis&auml;t&auml; raaka-aineet. Voit t&auml;ss&auml; myös lis&auml;t&auml; raaka-aineita jo olemassaoleviin annoksiin</p>
         
         <form method="POST" action="/lisaa-annos">        
             Annos:<br/>         
@@ -47,7 +47,7 @@
             <br/>
                 Lisäohje raaka-aineelle:<br/>
                 <input type="text" name="lisaohje"/>
-                <input type="submit" value="Lisaa valittu raaka-aine"/> 
+                <input type="submit" value="Lis&auml;&auml; valittu raaka-aine"/> 
                             
             <ol>
                 <li th:each="aine : ${ehdotetutAineet}">
@@ -57,7 +57,7 @@
         </form>
             <ul>
             <li>
-                <a th:href="@{~/keittokirja}">Siirry keittokirjan paasivulle!</a>
+                <a th:href="@{~/keittokirja}">Siirry keittokirjan p&auml;&auml;sivulle!</a>
             </li>
         </ul>
     </body>  
