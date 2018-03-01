@@ -53,6 +53,19 @@ public class Main {
         if (System.getenv("PORT") != null) {
             Spark.port(Integer.valueOf(System.getenv("PORT")));
         }
+        //Ylimääräinen etusivu
+        Spark.get("/", (req, res) -> {
+            HashMap map = new HashMap<>();
+
+            List<Annos> annokset = annosDao.findAll();
+
+            map.put("annokset", annokset);
+            for (Annos annos : annokset) {
+                System.out.println(" (Main) " + annos.getId() + "|" + annos.getNimi());
+            }
+
+            return new ThymeleafTemplateEngine().render(new ModelAndView(map, "keittokirja"));
+        });
 
         //Etusivu
         Spark.get("/keittokirja", (req, res) -> {
@@ -191,7 +204,6 @@ public class Main {
             map.put("annokset", annoksetUus);
             map.put("raakaaineet", raakaaineett);
             map.put("jolaitetut", jolaitettuja);
-            map.put("annokset", annokset);
 
             System.out.println("(Main, get lisaa-annos) mappiin lisätty raakaaineet ja jolaitetut");
 
