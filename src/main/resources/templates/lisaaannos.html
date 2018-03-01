@@ -4,16 +4,30 @@
     <head>
         <title>Annoksen koostaminen </title>
     </head>    
-    <body>
+    <body background = "https://cdn.pixabay.com/photo/2016/07/14/19/55/fat-1517449_960_720.jpg"> 
+      <style>
+      h2 { 
+          font-size: 1.25em;
+          font-weight: bold;
+      }
+      h3 { 
+          font-size: 1.20em;
+          font-weight: bold;
+      }
+      h4 { 
+      font-size: 1.15em;
+      font-weight: bold;
+      }
+      </style>
         <h1>Uuden annoksen lis&auml;&auml;minen Keittokirjaan</h1>
         <br/>
             <form method="POST" action="/lisaa-annos/lisataan"> <!-- lisätty /lisaa-annos-->
-                Kirjoita Keittokirjaan lis&auml;tt&auml;v&auml;n annoksen nimi:<br/>
+                <h2>Kirjoita Keittokirjaan lis&auml;tt&auml;v&auml;n annoksen nimi:</h2><br/>
                 <input type="text" name="nimi"/>   
                 <br/>
                 <input type="submit" value="Lis&auml;&auml; Keittokirjaan"/><br/>
             </form>
-        <p> Valitse, mihin annokseen haluat lis&auml;t&auml; raaka-aineet. Voit t&auml;ss&auml; myös lis&auml;t&auml; raaka-aineita jo olemassaoleviin annoksiin</p>
+        <h3> Valitse, mihin annokseen haluat lis&auml;t&auml; raaka-aineet. Voit t&auml;ss&auml; myös lis&auml;t&auml; raaka-aineita jo olemassaoleviin annoksiin</h3>
         
         <form method="POST" action="/lisaa-annos">        
             Annos:<br/>         
@@ -30,7 +44,7 @@
         
         <fieldset>
         <legend>Raaka-aineiden valitseminen edellä valitsemaasi annokseen</legend>
-        <p> Valitse seuraavasta valikosta lisäämisjärjestyksessä lisättävät aineet annokseen</p>
+        <h4> Valitse seuraavasta valikosta lisäämisjärjestyksessä lisättävät aineet annokseen</h4>
           
         <form method="POST" action="/lisaa-annos">
             Raaka-aine:<br/>
