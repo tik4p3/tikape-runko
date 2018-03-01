@@ -55,7 +55,7 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
 
                 RaakaaineAnnos raakaaine = new RaakaaineAnnos(rs.getInt("raakaaine_id"), rs.getInt("annos_id"));
 
-                //raakaaineet.add(raakaaine); rs.getString("maara"), rs. rs.getString("nimi");
+                raakaaineet.add(raakaaine);
 
             }
             stmt.close();
