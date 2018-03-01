@@ -185,7 +185,6 @@ public class Main {
             List<Annos> annokset = new ArrayList();
 
             raakaaineett = raakaaineDao.findAll();
-            List<Annos> annokset = new ArrayList<>();
             annokset = annosDao.findAll();
             
             map.put("annokset",annokset);
