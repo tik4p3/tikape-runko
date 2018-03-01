@@ -4,7 +4,15 @@ Raaka-aineita haetaan raaka-aineet listasta
     <head>
         <title>Lis&auml;&auml; ja tarkastele </title>
     </head>
-    <body>
+    <body background = "https://cdn.pixabay.com/photo/2016/04/25/10/57/cat-1351612_960_720.jpg">
+    <style>
+        h1 { 
+        margin-left: 5;
+        font-size: 1.5em;
+        font-weight: bold;
+        color: midnightblue;
+        }
+    </style>
         <h1> K&auml;ytöss&auml; olevat raaka-aineet</h1>    
         <ul>
             <li th:each="aine : ${raakaaineet}">
