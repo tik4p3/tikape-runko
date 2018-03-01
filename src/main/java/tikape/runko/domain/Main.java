@@ -183,12 +183,12 @@ public class Main {
 
             HashMap<String, Object> map = new HashMap();
             List<Raakaaine> raakaaineett = new ArrayList();
-            List<Annos> annokset = new ArrayList();
-
             raakaaineett = raakaaineDao.findAll();
-            annokset = annosDao.findAll();
             
-            map.put("annokset",annokset);
+            List<Annos> annoksetUus = new ArrayList();
+            annoksetUus = annosDao.findAll();
+           
+            map.put("annokset", annoksetUus);
             map.put("raakaaineet", raakaaineett);
             map.put("jolaitetut", jolaitettuja);
             map.put("annokset", annokset);
