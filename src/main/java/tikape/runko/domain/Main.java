@@ -86,6 +86,7 @@ public class Main {
             
 
             map.put("annos", annosDao.findOne(annosId));
+            map.put("aineet", oikeat);
             
             
 
