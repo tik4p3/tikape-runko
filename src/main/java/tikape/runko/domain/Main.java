@@ -196,10 +196,28 @@ public class Main {
 
         Spark.post("/lisaa-annos/lisataan", (req, res) -> {
 
-            String AnnosNimi = req.queryParams("nimi");
+            String annosNimi = req.queryParams("nimi");
 
-            System.out.println("(Main /lisaa-annos/lisataan, post) Lisätään annosta: " + AnnosNimi);
+            System.out.println("(Main /lisaa-annos/lisataan, post) Lisätään annosta: " + annosNimi);
 
+            annosDao.saveOrUpdate(annosNimi);
+            
+            int annosId = annosDao.findId(annosNimi);
+            
+            for (Jolaitettu jolaitettu : jolaitettuja)    {
+                int i = 1;
+                String raakaaineNimi = jolaitettu.getRaakaaine().getNimi();
+                int raakaaineId = raakaaineDao.findId(raakaaineNimi);
+                RaakaaineAnnos raakaaineannos = new RaakaaineAnnos(raakaaineId, annosId);
+                raakaaineannos.setMaara(jolaitettu.getMaara());
+                raakaaineannos.setLisaohje(jolaitettu.getLisaohje());
+                raakaaineannos.setJarjestys(i);
+                raakaaineAnnosDao.saveOrUpdate(raakaaineannos);
+                i++;
+            }
+            
+            jolaitettuja.clear();
+            
             // Sivun päivittäminen
             res.redirect("/lisaa-annos");
 
