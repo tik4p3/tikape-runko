@@ -22,10 +22,10 @@
             Raaka-aine:<br/>
             <div>
                 <select name="raakaaine">
-                    <option th:each="aine : ${raakaaineet}"                   
+                    <option th:each="raakaaine : ${raakaaineet}"                   
                         th:value="${raakaaine.nimi}"
                         th:text="${raakaaine.nimi}"
-                        th:label = "${raakaaine.nimi}"
+                        th:label="${raakaaine.nimi}"
                     />                    
                 </select>
             </div>
