@@ -2,10 +2,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 Raaka-aineita haetaan raaka-aineet listasta    
     <head>
-        <title>Lisaa ja tarkastele </title>
+        <title>Lis&auml;&auml; ja tarkastele </title>
     </head>
     <body>
-        <h1> Käytössa olevat raaka-aineet</h1>    
+        <h1> K&auml;ytöss&auml; olevat raaka-aineet</h1>    
         <ul>
             <li th:each="aine : ${raakaaineet}">
                 <span th:text="${aine.nimi}">Raaka-aineet</span><br/>
@@ -20,7 +20,7 @@ Raaka-aineita haetaan raaka-aineet listasta
                 Raaka-aine:<br/>
                 <input type="text" name="raakaaine"/>   
                 <br/>
-                <input type="submit" value="Lisaa raaka-aine Keittokirjaan"/><br/>
+                <input type="submit" value="Lis&auml;&auml; raaka-aine Keittokirjaan"/><br/>
             </form>
             
         <p>Poista raaka-aineita Keittokirjasta</p>
@@ -32,7 +32,7 @@ Raaka-aineita haetaan raaka-aineet listasta
             </form>
             <ul>
             <li>
-                <a th:href="@{~/keittokirja}">Siirry keittokirjan paasivulle!</a>
+                <a th:href="@{~/keittokirja}">Siirry keittokirjan p&auml;&auml;sivulle!</a>
             </li>
         </ul>
     
