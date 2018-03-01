@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tikape.runko.database.RaakaaineDao;
+import static tikape.runko.domain.Main.i;
 
 public class Raakaaine {
     
@@ -19,7 +20,8 @@ public class Raakaaine {
     }
     public Raakaaine(String nimi) {
         this.nimi = nimi;
-        
+        this.id = i;
+        i++;
         System.out.println("(Raakaaine, konstruktori 2) Lisättiin ilman id-numeroa raaka-aine: " + this.nimi);
     }
     
