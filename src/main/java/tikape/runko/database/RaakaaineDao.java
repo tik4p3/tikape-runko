@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Database;
+import static tikape.runko.domain.Main.i;
 import tikape.runko.domain.Raakaaine;
 
 public class RaakaaineDao implements Dao<Raakaaine, Integer> {
@@ -100,9 +101,11 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
     public Raakaaine saveOrUpdate(String nimi) throws SQLException {
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaAine (nimi) VALUES (?)");
-            stmt.setString(1, nimi);
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raakaaine (id, nimi) VALUES (?, ?)");
+            stmt.setInt(1, i);
+            stmt.setString(2, nimi);
             stmt.executeUpdate();
+            stmt.close();
         }
 
         return null;

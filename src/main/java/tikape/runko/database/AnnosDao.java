@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import tikape.runko.domain.Annos;
 import tikape.runko.domain.Database;
+import static tikape.runko.domain.Main.i;
 import tikape.runko.domain.Raakaaine;
 
 public class AnnosDao implements Dao<Annos, Integer> {
@@ -78,10 +79,14 @@ public class AnnosDao implements Dao<Annos, Integer> {
     public Annos saveOrUpdate(String annos) throws SQLException {
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (nimi) VALUES (?)");
-            stmt.setString(1, annos);
+        PreparedStatement stmt = conn.prepareStatement("INSERT INTO Annos (id, nimi) VALUES (?, ?)");
+        stmt.setInt(1, i);
+        i++;
+        stmt.setString(2, annos);
             stmt.executeUpdate();
         }
+        
+        
 
         return null;
     }
