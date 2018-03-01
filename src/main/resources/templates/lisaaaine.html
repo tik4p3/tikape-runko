@@ -12,7 +12,7 @@
         color: midnightblue;
         }
     </style>
-        <h1> K&auml;ytöss&auml; olevat raaka-aineet</h1>    
+        <h1> K&auml;yt&ouml;ss&auml; olevat raaka-aineet</h1>    
         <ul>
             <li th:each="aine : ${raakaaineet}">
                 <span th:text="${aine.nimi}">Raaka-aineet</span><br/>
@@ -22,12 +22,12 @@
           -->  
             </li>
         </ul>
-        <p>Lisaa raaka-aineita Keittokirjaan</p>
+        <p>Lisaa raaka-aineita</p>
             <form method="POST" action="/lisaa-aineita">
                 Raaka-aine:<br/>
                 <input type="text" name="raakaaine"/>   
                 <br/>
-                <input type="submit" value="Lis&auml;&auml; raaka-aine Keittokirjaan"/><br/>
+                <input type="submit" value="Lis&auml;&auml; raaka-aine"/><br/>
             </form>
             
         <p>Poista raaka-aineita Keittokirjasta</p>
@@ -35,7 +35,7 @@
                 Raaka-aine:<br/>
                 <input type="text" name="poistettava"/>   
                 <br/>
-                <input type="submit" value="Poista raaka-aine Keittokirjasta"/><br/>
+                <input type="submit" value="Poista raaka-aine"/><br/>
             </form>
             <ul>
             <li>

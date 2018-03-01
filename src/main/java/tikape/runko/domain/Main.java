@@ -185,9 +185,10 @@ public class Main {
             List<Annos> annokset = new ArrayList();
 
             raakaaineett = raakaaineDao.findAll();
-            
+            List<Annos> annokset = new ArrayList<>();
             annokset = annosDao.findAll();
-
+            
+            map.put("annokset",annokset);
             map.put("raakaaineet", raakaaineett);
             map.put("jolaitetut", jolaitettuja);
             map.put("annokset", annokset);
@@ -364,10 +365,12 @@ Spark.post("/lisaa-annos/lisataan", (req, res) -> {
         //TILASTOT
         //Tilastotietoa annoksista “/tilastotieto”
         Spark.get("/tilastotieto", (req, res) -> {
-
-            HashMap<String, Object> map = new HashMap();
+            HashMap map = new HashMap<>();
+            List<Annos> annokset = new ArrayList<>();
+            annokset = annosDao.findAll();
+            map.put("annokset",annokset);
             map.put("raakaaineet", raakaaineDao.findAll());
-
+            
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "tilastotieto"));
         });
 
