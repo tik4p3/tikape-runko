@@ -53,7 +53,7 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
 
             while (rs.next()) {
 
-                RaakaaineAnnos raakaaine = new RaakaaineAnnos(rs.getInt("raaka_aine_id"), rs.getInt("annos_id"));
+                RaakaaineAnnos raakaaine = new RaakaaineAnnos(rs.getInt("raakaaine_id"), rs.getInt("annos_id"));
 
                 //raakaaineet.add(raakaaine); rs.getString("maara"), rs. rs.getString("nimi");
 
@@ -70,7 +70,7 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
     public RaakaaineAnnos saveOrUpdate(RaakaaineAnnos object) throws SQLException {
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaaineAnnos (raaka_aine_id, annos_id, maara, jarjestys, ohje) VALUES (?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaaineAnnos (raakaaine_id, annos_id, maara, jarjestys, ohje) VALUES (?, ?, ?, ?, ?)");
             stmt.setInt(1, object.getRaakaaineId());
             stmt.setInt(2, object.getAnnosId());
             stmt.setString(3, object.getMaara());
@@ -86,7 +86,7 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
     public void delete(Integer key) throws SQLException {
 
         Connection conn = database.getConnection();
-        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Raakaaine WHERE raaka_aine_id = ?, annos_id = ?");
+        PreparedStatement stmt = conn.prepareStatement("DELETE FROM Raakaaine WHERE raakaaine_id = ?, annos_id = ?");
 
         stmt.setInt(1, key);
         stmt.setInt(1, key);

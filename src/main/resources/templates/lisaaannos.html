@@ -36,7 +36,7 @@
                     <option th:each="annos : ${annokset}"
                             th:value="${annos.nimi}"
                             th:text="${annos.nimi}"
-                            label = "${annos.nimi}"
+                            th:label = "${annos.nimi}"
                     />                    
                 </select>
             </div>     
