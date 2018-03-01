@@ -277,10 +277,9 @@ public class Main {
         //TILASTOT
         //Tilastotietoa annoksista “/tilastotieto”
         Spark.get("/tilastotieto", (req, res) -> {
-
-            HashMap<String, Object> map = new HashMap();
+            HashMap map = new HashMap<>();           
             map.put("raakaaineet", raakaaineDao.findAll());
-
+            
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "tilastotieto"));
         });
 
