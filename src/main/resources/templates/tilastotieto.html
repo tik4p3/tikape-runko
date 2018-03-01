@@ -14,7 +14,8 @@
     }
     </style>
     <h1>Keittokirjan tietojen haku</h1> 
-    <p> Raaka-aineita keittokirjassa yhteens&auml;: <span th:text="${raakaaineet.size()}">count</span> </p>
+    <p> Raaka-aineita keittokirjassa yhteens&auml;: <span th:text="${raakaaineet.size()}">count</span> </p><br/>
+    <p> Raaka-aineita keittokirjassa yhteens&auml;: <span th:text="${annokset.size()}">count</span> </p>
   
     <p> Valitse tarkasteltava raaka-aine valikosta</p>
         <form method="POST" action="/tilasto">
