@@ -3,6 +3,7 @@ package tikape.runko.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import static tikape.runko.domain.Main.i;
 
 public class Annos {
     
@@ -13,6 +14,13 @@ public class Annos {
 
     public Annos(Integer id, String nimi) {
         this.id = id;
+        this.nimi = nimi;
+        this.aineet = new ArrayList<>();
+    }
+    
+    public Annos(String nimi) {
+        this.id = i;
+        i++;
         this.nimi = nimi;
         this.aineet = new ArrayList<>();
     }

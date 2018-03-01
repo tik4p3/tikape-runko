@@ -15,7 +15,7 @@ import tikape.runko.database.RaakaaineDao;
 public class Main {
     
     static String valittuannos;
-    static public int i = 1;
+    static public int i = 100;
 
     public static void main(String[] args) throws Exception {
 

@@ -103,6 +103,7 @@ public class RaakaaineDao implements Dao<Raakaaine, Integer> {
         try (Connection conn = database.getConnection()) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO Raakaaine (id, nimi) VALUES (?, ?)");
             stmt.setInt(1, i);
+            i++;
             stmt.setString(2, nimi);
             stmt.executeUpdate();
             stmt.close();
