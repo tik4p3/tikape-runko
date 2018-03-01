@@ -132,5 +132,46 @@ public class AnnosDao implements Dao<Annos, Integer> {
         stmt.close();
         conn.close();
     }
+    
+    public int findId (String aine) throws SQLException   {
+        int id = -1;
+        
+        System.out.println("(RaakaaineDao) Etsitään ainetta: " + aine);
+        
+        List<Annos> raakaaineet;
+
+        try (Connection connection = database.getConnection()) {
+
+            PreparedStatement stmt = connection.prepareStatement("SELECT * FROM Annos");
+            ResultSet rs = stmt.executeQuery();
+            raakaaineet = new ArrayList<>();
+            while (rs.next()) {
+                
+                int loydettyId = rs.getInt("id");
+                String loydettyNimi = rs.getString("nimi");
+                
+                System.out.println("(RaakaaineDao, findId) Löytyi raaka-aine: " + loydettyId + "|" + loydettyNimi);
+                Annos annos = new Annos(loydettyId, loydettyNimi);
+
+                raakaaineet.add(annos);
+
+            }
+            stmt.close();
+            rs.close();
+            
+            
+            for (Annos annos : raakaaineet) {
+                if (annos.getNimi().equals(aine))    {
+                    id = annos.getId();
+                    
+                    System.out.println("(RaakaaineDao, findId) Löydettiin oikea avain: " + id);
+                }
+            }
+            
+        }
+        
+        
+        return id;
+    }
 
 }
