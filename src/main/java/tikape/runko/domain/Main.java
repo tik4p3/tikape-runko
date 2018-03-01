@@ -70,8 +70,24 @@ public class Main {
 
         Spark.get("/annoslistaus/:id", (req, res) -> {
             HashMap map = new HashMap<>();
+            
+            int annosId = Integer.parseInt(req.params("id"));
+            
+            List<RaakaaineAnnos> kaikki = raakaaineAnnosDao.findAll();
+            List<RaakaaineAnnos> oikeat = new ArrayList();
+            
+            for (RaakaaineAnnos a: kaikki)   {
+                if (a.getAnnosId() == annosId)   {
+                    a.setNimi(annosDao.findOne(annosId).getNimi());
+                    oikeat.add(a);
+                }
+            }
+            
+            
 
-            map.put("annos", annosDao.findOne(Integer.parseInt(req.params("id"))));
+            map.put("annos", annosDao.findOne(annosId));
+            
+            
 
             return new ModelAndView(map, "annos");
         }, new ThymeleafTemplateEngine());
@@ -180,8 +196,8 @@ public class Main {
 
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "lisaaannos"));
         });
-
-        Spark.post("/lisaa-annos", (req, res) -> {
+        
+        Spark.post("/lisaa-annos/lisaa_raaka-aine", (req, res) -> {
 
             // Haetaan Thymeleafilta tiedot Thymeleafin nimeämisten mukaan
             String raakaaine = req.queryParams("raakaaine");
@@ -195,14 +211,50 @@ public class Main {
             int id = raakaaineDao.findId(raakaaine);
             System.out.println("(Main, lisaa-annos) Id on: " + id);
             Raakaaine aine = raakaaineDao.findOne(id);
+            
+            
+            
+            int annosId = annosDao.findId(valittuannos);
+            
+            // järjestyksen osoittava int
+            int i = 1;
+            
+            
+            RaakaaineAnnos raakaaineannos = new RaakaaineAnnos(id, annosId);
+            raakaaineannos.setLisaohje(lisaohje);
+            raakaaineannos.setMaara(lukumaara);
+            raakaaineannos.setJarjestys(i);
 
-            jolaitettuja.add(new Jolaitettu(aine, aine.getNimi(), lisaohje, lukumaara));
+            raakaaineAnnosDao.saveOrUpdate(raakaaineannos);
 
             // Sivun päivittäminen
             res.redirect("/lisaa-annos");
 
             return "";
         });
+
+//        Spark.post("/lisaa-annos", (req, res) -> {
+//
+//            // Haetaan Thymeleafilta tiedot Thymeleafin nimeämisten mukaan
+//            String raakaaine = req.queryParams("raakaaine");
+//            String lukumaara = req.queryParams("lukumaara");
+//            String lisaohje = req.queryParams("lisaohje");
+//
+//            System.out.println("(Main, lisaa-annos) Saatiin seuraavat: "
+//                    + raakaaine + " (raaka-aine), " + lukumaara
+//                    + " (määrä), ja " + lisaohje + " (lisäohje)");
+//
+//            int id = raakaaineDao.findId(raakaaine);
+//            System.out.println("(Main, lisaa-annos) Id on: " + id);
+//            Raakaaine aine = raakaaineDao.findOne(id);
+//
+//            jolaitettuja.add(new Jolaitettu(aine, aine.getNimi(), lisaohje, lukumaara));
+//
+//            // Sivun päivittäminen
+//            res.redirect("/lisaa-annos");
+//
+//            return "";
+//        });
 
 //        Spark.post("/lisaa-annos/lisataan", (req, res) -> {
 //

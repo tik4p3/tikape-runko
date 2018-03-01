@@ -8,6 +8,15 @@ public class RaakaaineAnnos {
     private String maara;
     private String lisaohje;
     private int jarjestys;
+    private String nimi;
+
+    public String getNimi() {
+        return nimi;
+    }
+
+    public void setNimi(String nimi) {
+        this.nimi = nimi;
+    }
     
     // tarvitaankohan näitä
     private int raakaaine_id;

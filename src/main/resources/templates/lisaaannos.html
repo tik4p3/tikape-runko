@@ -46,14 +46,14 @@
         <legend>Raaka-aineiden valitseminen edell&auml; valitsemaasi annokseen</legend>
         <h4> Valitse seuraavasta valikosta lis&auml;&auml;misj&auml;rjestyksess&auml; lis&auml;tt&auml;v&auml;t aineet annokseen</h4>
           
-        <form method="POST" action="/lisaa-annos">
+        <form method="POST" action="/lisaa-annos/lisaa_raaka-aine">
             Raaka-aine:<br/>
             <div>
                 <select name="raakaaine">
                     <option th:each="aine : ${raakaaineet}"                   
                         th:value="${aine.nimi}"
                         th:text="${aine.nimi}"
-                        label = "mita tahan?"
+                        label = "${aine.nimi}"
                     />                    
                 </select>
             </div>

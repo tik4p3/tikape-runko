@@ -70,7 +70,7 @@ public class RaakaaineAnnosDao implements Dao<RaakaaineAnnos, Integer> {
     public RaakaaineAnnos saveOrUpdate(RaakaaineAnnos object) throws SQLException {
 
         try (Connection conn = database.getConnection()) {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaaineAnnos (raakaaine_id, annos_id, maara, jarjestys, lisaohje) VALUES (?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO RaakaaineAnnos (raaka_aine_id, annos_id, maara, jarjestys, ohje) VALUES (?, ?, ?, ?, ?)");
             stmt.setInt(1, object.getRaakaaineId());
             stmt.setInt(2, object.getAnnosId());
             stmt.setString(3, object.getMaara());
