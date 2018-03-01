@@ -33,7 +33,9 @@ public class Jolaitettu {
         return maara;
     }
     
-    
+    public Raakaaine getRaakaaine() {
+        return raakaaine;
+    }
     
     
     
