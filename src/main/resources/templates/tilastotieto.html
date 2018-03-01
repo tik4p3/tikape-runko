@@ -14,23 +14,22 @@
     }
     </style>
     <h1>Keittokirjan tietojen haku</h1> 
-    
+    <p> Raaka-aineita keittokirjassa yhteens&auml;: <span th:text="${raakaaineet.size()}">count</span> </p>
+  
     <p> Valitse tarkasteltava raaka-aine valikosta</p>
-        <form method="POST" action="/tilastotieto">
+        <form method="POST" action="/tilasto">
             Raaka-aine:<br/>
-            <ul>
-                <li th:each="aine:${raakaaineet}">
+            <div>
                 <select name="raakaaine">
-                    <option name="${aine.nimi}">Raaka-aine</option>                    
+                    <option th:each="aine : ${raakaaineet}"                   
+                        th:value="${aine.nimi}"
+                        th:text="${aine.nimi}"
+                        label = "mita tahan?"
+                    />                    
                 </select>
-                <input type="submit" value="Tarkastele tietoja"/><br/>
-                </li> 
-            </ul>
-        </form>    
-            <!-- Käytetty uutta java puoellla lisättäävää aineita listaa ja lasketaan sen koko. Jos ei toimi, koita :
-            <h3> Raaka-aine esiintyy <span th:text="${aineita.size()}">count</span>:ssä annoksessa </h3> 
-        <h2> Raaka-aine esiintyy <span th:text="${aineita.size()}">count</span>:ssä annoksessa </h2>-->
-             
+            </div>
+            </form>
+            
             <ul>
                 <li>
                     <a th:href="@{~/keittokirja}">Siirry keittokirjan p&auml;&auml;sivulle!</a>
