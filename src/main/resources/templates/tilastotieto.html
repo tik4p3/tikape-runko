@@ -8,7 +8,7 @@
     <h1>Keittokirjan tietojen haku</h1> 
     
     <p> Valitse tarkasteltava raaka-aine valikosta</p>
-        <form method="POST" action="/???">
+        <form method="POST" action="/tilastotieto">
             Raaka-aine:<br/>
             <ul>
                 <li th:each="aine:${raakaaineet}">
@@ -20,8 +20,8 @@
             </ul>
         </form>    
             <!-- Käytetty uutta java puoellla lisättäävää aineita listaa ja lasketaan sen koko. Jos ei toimi, koita :
-            <h3> Raaka-aine esiintyy <span th:text="${aineita.size()}">count</span>:ssä annoksessa </h3> -->
-        <h2> Raaka-aine esiintyy <span th:text="${aineita.size()}">count</span>:ssä annoksessa </h2>
+            <h3> Raaka-aine esiintyy <span th:text="${aineita.size()}">count</span>:ssä annoksessa </h3> 
+        <h2> Raaka-aine esiintyy <span th:text="${aineita.size()}">count</span>:ssä annoksessa </h2>-->
              
             <ul>
                 <li>
