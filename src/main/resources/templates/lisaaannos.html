@@ -29,14 +29,14 @@
             </form>
         <h3> Valitse, mihin annokseen haluat lis&auml;t&auml; raaka-aineet. Voit t&auml;ss&auml; my&ouml;s lis&auml;t&auml; raaka-aineita jo olemassaoleviin annoksiin</h3>
         
-        <form method="POST" action="/lisaa-annos">        
+        <form method="POST" action="/lisaa-annos/valitse_annos">        
             Annos:<br/>         
             <div>
                 <select name = "annos">
                     <option th:each="annos : ${annokset}"
                             th:value="${annos.nimi}"
                             th:text="${annos.nimi}"
-                            label = "mita tahan?"
+                            label = "${annos.nimi}"
                     />                    
                 </select>
             </div>     

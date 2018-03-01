@@ -13,6 +13,8 @@ import tikape.runko.database.RaakaaineAnnosDao;
 import tikape.runko.database.RaakaaineDao;
 
 public class Main {
+    
+    static String valittuannos;
 
     public static void main(String[] args) throws Exception {
 
@@ -40,6 +42,10 @@ public class Main {
         // Lisää annoksen lista, jossa on valitut raaka-aineet, mutta vielä niin, että niitä ei lisätä tietokantaan
         // Näin ei tarvitse esimerkiksi annosId-tunnusta olla, kun sitä ei vielä edes ole
         List<Jolaitettu> jolaitettuja = new ArrayList();
+        
+        // Annos, johon lisätään raaka-aineita
+        
+       
 
         // Tämä ryhmitelty sivujen mukaan - etusivu ja neljä tai viisi muuta sivua
         // Jokaisella sivulla Sparkin get ja post -metodit, vaikka en olisi niille käyttöä keksinyt
@@ -160,11 +166,15 @@ public class Main {
 
             HashMap<String, Object> map = new HashMap();
             List<Raakaaine> raakaaineett = new ArrayList();
+            List<Annos> annokset = new ArrayList();
 
             raakaaineett = raakaaineDao.findAll();
+            
+            annokset = annosDao.findAll();
 
             map.put("raakaaineet", raakaaineett);
             map.put("jolaitetut", jolaitettuja);
+            map.put("annokset", annokset);
 
             System.out.println("(Main, get lisaa-annos) mappiin lisätty raakaaineet ja jolaitetut");
 
@@ -194,7 +204,37 @@ public class Main {
             return "";
         });
 
-        Spark.post("/lisaa-annos/lisataan", (req, res) -> {
+//        Spark.post("/lisaa-annos/lisataan", (req, res) -> {
+//
+//            String annosNimi = req.queryParams("nimi");
+//
+//            System.out.println("(Main /lisaa-annos/lisataan, post) Lisätään annosta: " + annosNimi);
+//
+//            annosDao.saveOrUpdate(annosNimi);
+//            
+//            int annosId = annosDao.findId(annosNimi);
+//            
+//            for (Jolaitettu jolaitettu : jolaitettuja)    {
+//                int i = 1;
+//                String raakaaineNimi = jolaitettu.getRaakaaine().getNimi();
+//                int raakaaineId = raakaaineDao.findId(raakaaineNimi);
+//                RaakaaineAnnos raakaaineannos = new RaakaaineAnnos(raakaaineId, annosId);
+//                raakaaineannos.setMaara(jolaitettu.getMaara());
+//                raakaaineannos.setLisaohje(jolaitettu.getLisaohje());
+//                raakaaineannos.setJarjestys(i);
+//                raakaaineAnnosDao.saveOrUpdate(raakaaineannos);
+//                i++;
+//            }
+//            
+//            jolaitettuja.clear();
+//            
+//            // Sivun päivittäminen
+//            res.redirect("/lisaa-annos");
+//
+//            return "";
+//        });
+
+Spark.post("/lisaa-annos/lisataan", (req, res) -> {
 
             String annosNimi = req.queryParams("nimi");
 
@@ -204,20 +244,15 @@ public class Main {
             
             int annosId = annosDao.findId(annosNimi);
             
-            for (Jolaitettu jolaitettu : jolaitettuja)    {
-                int i = 1;
-                String raakaaineNimi = jolaitettu.getRaakaaine().getNimi();
-                int raakaaineId = raakaaineDao.findId(raakaaineNimi);
-                RaakaaineAnnos raakaaineannos = new RaakaaineAnnos(raakaaineId, annosId);
-                raakaaineannos.setMaara(jolaitettu.getMaara());
-                raakaaineannos.setLisaohje(jolaitettu.getLisaohje());
-                raakaaineannos.setJarjestys(i);
-                raakaaineAnnosDao.saveOrUpdate(raakaaineannos);
-                i++;
-            }
-            
-            jolaitettuja.clear();
-            
+            // Sivun päivittäminen
+            res.redirect("/lisaa-annos");
+
+            return "";
+        });
+
+        Spark.post("/lisaa-annos/valitse_annos", (req, res) -> {
+
+            valittuannos = req.queryParams("nimi");
             // Sivun päivittäminen
             res.redirect("/lisaa-annos");
 
