@@ -162,7 +162,10 @@ public class Main {
             List<Raakaaine> raakaaineett = new ArrayList();
 
             raakaaineett = raakaaineDao.findAll();
-
+            List<Annos> annokset = new ArrayList<>();
+            annokset = annosDao.findAll();
+            
+            map.put("annokset",annokset);
             map.put("raakaaineet", raakaaineett);
             map.put("jolaitetut", jolaitettuja);
 
