@@ -389,7 +389,10 @@ Spark.post("/lisaa-annos/lisataan", (req, res) -> {
             return new ThymeleafTemplateEngine().render(new ModelAndView(map, "tilastotieto"));
         });
 
-        Spark.post("*", (req, res) -> {
+        Spark.post("/tilasto", (req, res) -> {
+            String aineNimi = req.queryParams("nimi");
+            int aineId = raakaaineDao.findId(aineNimi);
+            
 
             return "";
         });
