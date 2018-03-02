@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import spark.ModelAndView;
 import spark.Spark;
 import spark.template.thymeleaf.ThymeleafTemplateEngine;
@@ -15,7 +16,8 @@ import tikape.runko.database.RaakaaineDao;
 public class Main {
     
     static String valittuannos;
-    static public int i = 100;
+    static private Random random = new Random();
+    static public int i = random.nextInt(1000);
 
     public static void main(String[] args) throws Exception {
 
